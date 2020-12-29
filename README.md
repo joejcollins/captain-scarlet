@@ -11,6 +11,7 @@
     * Explorer
         * Create a folder.
         * Create an html file.
+        * Create a ccs file.
     * Search
     * Source Code Manager
     * Extensions
@@ -23,10 +24,13 @@
     * 
 * Extensions
 
+* Terminal
+    * Run a simple webserver `python3 -m http.server`
+
 
 * Accept the invitation <https://github.com/joejcollins/captain-scarlet/invitations>
 
-## Git
+## Git with Github
 
 * Clone the repo <https://github.com/joejcollins/captain-scarlet>.
     *
