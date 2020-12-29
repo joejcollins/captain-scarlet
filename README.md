@@ -15,4 +15,7 @@
 
 ## Gitpod 
 
-Open at Gitpod <https://gitpod.io/#https://github.com/joejcollins/captain-scarlet>.
+* Open at Gitpod <https://gitpod.io/#https://github.com/joejcollins/captain-scarlet>.
+* Login with GitHub & Launch Workspace
+* Authorize Gitpod by gitpod-io
+* Create Account, Accept Terms
