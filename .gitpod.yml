@@ -6,7 +6,10 @@ ports:
   - port: 8000
     onOpen: ignore
 
+tasks:
+  - init: npm install -g vscode-ripgrep
+
 vscode:
   extensions:
-    - ms-python.python
-    - Gruntfuggly.todo-tree
+    - eamodio.gitlens@10.2.1:WIWu3zHU4VPT8r/v866LUw==
+    - gruntfuggly.todo-tree@0.0.177:GCyi2twUFe/rN35G99jXYQ==
