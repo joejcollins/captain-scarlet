@@ -9,3 +9,4 @@ ports:
 vscode:
   extensions:
     - eamodio.gitlens@10.2.1:WIWu3zHU4VPT8r/v866LUw==
+    - streetsidesoftware.code-spell-checker@1.10.2:IKNWSiKNhoiWZ0g+IVw/mA==
