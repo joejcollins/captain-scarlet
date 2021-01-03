@@ -1,0 +1,12 @@
+image:
+  file: .gitpod.Dockerfile
+
+# This is to get rid of the annoying popup feel free to leave this out
+ports:
+  - port: 8000
+    onOpen: ignore
+
+vscode:
+  extensions:
+    - ms-python.python
+    - Gruntfuggly.todo-tree

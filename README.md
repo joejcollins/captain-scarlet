@@ -1,3 +1,4 @@
+
 # VSCode and Git Demo
 
 ## VSCode
@@ -52,3 +53,6 @@
 * Edit files
 
 * Allow write to public repo https://gitpod.io/access-control/?updated=github.com@public_repo
+
+
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/joejcollins/captain-scarlet)
