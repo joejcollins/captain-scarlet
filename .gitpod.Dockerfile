@@ -1,7 +1,5 @@
 FROM gitpod/workspace-full
 
-# Install custom tools, runtimes, etc.
-# For example "bastet", a command-line tetris clone:
-# RUN brew install bastet
-#
-# More information: https://www.gitpod.io/docs/config-docker/
+RUN sudo add-apt-repository ppa:x4121/ripgrep -y \
+    && sudo apt-get update \
+    && sudo apt install ripgrep
