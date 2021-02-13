@@ -2,7 +2,9 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - command: sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
+  - command: |
+      sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
+      sudo rstudio-server start
 
 ports:
   - port: 8787
