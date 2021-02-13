@@ -8,9 +8,9 @@ tasks:
       sudo usermod -a -G rstudio-users gitpod
       sudo passwd gitpod
       touch /etc/rstudio/rserver.conf
-      echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf
-      touch ~/.Rprofile
-      echo setwd("/workspace/captain-scarlet") > ~/.Rprofile
+      sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
+      touch /home/gitpod/.Rprofile
+      sudo bash -c "echo setwd('/workspace/captain-scarlet') > /home/gitpod/.Rprofile" 
 
 ports:
   - port: 8000
