@@ -2,7 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
+  - init: |
+      sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
+      sudo groupadd rstudio-users
+      sudo usermod -a -G rstudio-users gitpod
+      sudo touch /etc/rstudio/rserver.conf
+      sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
 
 ports:
   - port: 8787
