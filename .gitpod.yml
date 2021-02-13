@@ -3,14 +3,14 @@ image:
 
 tasks:
   - command: sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
-      sudo groupadd rstudio-users
-      sudo usermod -a -G rstudio-users gitpod
-      sudo passwd gitpod
-      sudo touch /etc/rstudio/rserver.conf
-      sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
-      sudo touch /home/gitpod/.Rprofile
-      sudo bash -c "echo setwd('/workspace/captain-scarlet') > /home/gitpod/.Rprofile"
-      sudo rstudio-server start
+  - command: sudo groupadd rstudio-users
+  - command: sudo usermod -a -G rstudio-users gitpod
+  - command: sudo passwd gitpod
+  - command: sudo touch /etc/rstudio/rserver.conf
+  - command: sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
+  - command: sudo touch /home/gitpod/.Rprofile
+  - command: sudo bash -c "echo setwd('/workspace/captain-scarlet') > /home/gitpod/.Rprofile"
+  - command: sudo rstudio-server start
 
 ports:
   - port: 8000
