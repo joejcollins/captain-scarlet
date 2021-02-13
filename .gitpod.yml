@@ -10,7 +10,6 @@ tasks:
       sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
       sudo touch /home/gitpod/.Rprofile
       sudo bash -c "echo 'setwd(\"/workspace/captain-scarlet\")' >> /home/gitpod/.Rprofile"
-  - command: sudo rstudio-server restart
 
 ports:
   - port: 8787
