@@ -2,20 +2,9 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: |
-      sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
-      sudo groupadd rstudio-users
-      sudo usermod -a -G rstudio-users gitpod
-      sudo touch /etc/rstudio/rserver.conf
-      sudo bash -c "echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf"
-      sudo touch /home/gitpod/.Rprofile
-      sudo bash -c "echo 'setwd(\"/workspace/captain-scarlet\")' >> /home/gitpod/.Rprofile"
-  - command: |
-      sudo rstudio-server start
+  - init: sudo usermod --password $(openssl passwd -1 $RSTUDIO_PASSWORD) gitpod
 
 ports:
-  - port: 8000
-    onOpen: ignore
   - port: 8787
     onOpen: open-browser
   
