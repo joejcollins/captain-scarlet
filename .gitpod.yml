@@ -1,13 +1,26 @@
 image:
   file: .gitpod.Dockerfile
 
-# This is to get rid of the annoying popup feel free to leave this out
+tasks:
+  - command: |
+      sudo usermod --password $(openssl passwd -1 '$RSTUDIO_PASSWORD') gitpod
+      sudo groupadd rstudio-users
+      sudo usermod -a -G rstudio-users gitpod
+      sudo passwd gitpod
+      touch /etc/rstudio/rserver.conf
+      echo auth-required-user-group=rstudio-users > /etc/rstudio/rserver.conf
+      touch ~/.Rprofile
+      echo setwd("/workspace/captain-scarlet") > ~/.Rprofile
+
 ports:
   - port: 8000
     onOpen: ignore
-
+  - port: 8787
+    onOpen: open-browser
+  
 vscode:
   extensions:
     - eamodio.gitlens
     - streetsidesoftware.code-spell-checker
     - ms-python.python
+    - Ikuyadeu.r
