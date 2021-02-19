@@ -1,7 +1,7 @@
 FROM gitpod/workspace-full
 
 # Install LaTeX
-RUN sudo apt-get -q update \
+RUN sudo apt-get update \
  && sudo apt-get install -yq texlive \
  && sudo rm -rf /var/lib/apt/lists/* \
  && sudo apt-get install -y r-base gdebi-core \
