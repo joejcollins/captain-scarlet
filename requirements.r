@@ -4,7 +4,7 @@ install.packages(c(
     "base64enc", 
     "digest", 
     "evaluate", 
-    "glue", 
+    "glue",
     "highr", 
     "htmltools", 
     "jsonlite", 
