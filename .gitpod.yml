@@ -12,7 +12,7 @@ tasks:
       sudo bash -c "echo R_LIBS_USER=$GITPOD_REPO_ROOT/../.R/library > /home/gitpod/.Renviron"
       sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
       sudo usermod -a -G rstudio-users gitpod
-      sudo passwd -d gitpod
+      sudo usermod --password $(openssl passwd -1 password) gitpod
       sudo rstudio-server restart
 ports:
   - port: 8787
