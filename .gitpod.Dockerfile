@@ -3,6 +3,7 @@ FROM gitpod/workspace-full
 # Install LaTeX and R Server
 RUN sudo apt-get -q update \
  && sudo apt-get install -yq texlive-latex-extra  \
+ && sudo apt-get install libmpfr-dev \
  && sudo apt-get install -y r-base gdebi-core \
  && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1103-amd64.deb \
  && sudo gdebi -n rstudio-server-1.4.1103-amd64.deb \
