@@ -9,6 +9,19 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Import dummy data
+
+```{r import}
+df <- read.csv("data.csv", header = TRUE)
+df[,'gender']<-factor(df[,'gender'])
+```
+
+## Take a look
+
+```{r import}
+pie(df$gender, main="Pie Chart of Genders")
+```
+
 ## T Test
 
 
