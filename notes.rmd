@@ -1,0 +1,27 @@
+---
+title: "Notes"
+author: "Joe Collins"
+date: "02/04/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## T Test
+
+
+```{r ttest}
+set.seed(2820)
+preTreat <- c(rnorm(1000, mean = 145, sd = 9))
+postTreat <- c(rnorm(1000, mean = 138, sd = 8))
+t.test(preTreat, postTreat, paired = TRUE)
+```
+
+```{r gshit}
+ggbetweenstats(
+     x = preTreat,
+     y = postTreat,
+     title = "Distribution of sepal length across Iris species")
+```
