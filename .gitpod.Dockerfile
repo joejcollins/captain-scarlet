@@ -9,5 +9,6 @@ RUN sudo apt-get -q update \
  && sudo rm rstudio-server-1.4.1103-amd64.deb \
  && sudo groupadd rstudio-users \
  && sudo touch /etc/rstudio/rserver.conf \
+ && sudo bash -c "echo TZ='UTC' >> /etc/R/Renviron.site" \
  && sudo bash -c "echo auth-required-user-group=rstudio-users >> /etc/rstudio/rserver.conf" \
  && curl -fsSL https://starship.rs/install.sh | bash -s -- --yes

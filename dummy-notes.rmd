@@ -2,7 +2,7 @@
 title: "Dummy Notes"
 author: "Collins"
 date: "02/04/2021"
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -38,27 +38,6 @@ ggplot(df, aes(x=factor(1), fill=gender))+
   geom_bar(width = 1)+
   coord_polar("y")
 ```
-## Word clouds
-
-### For Pick a Word
-
-```{r cloze-cloud}
-library(wordcloud2)
-library(tidyverse)
-pick_columns = df %>% select(8:28)
-pick_counts = colSums(pick_columns)
-pick_counts = as.table(pick_counts)
-wordcloud2(data = pick_counts)
-```
-
-### For Cloze Procedure
-
-```{r cloze-cloud}
-cloze_words = as.vector(as.matrix(df[,c("q1", "q2", "q3", "q4", "q5")]))
-cloze_counts = table(cloze_words)
- wordcloud2(data = cloze_counts)
-```
-
 
 ## T Test
 
@@ -69,3 +48,33 @@ preTreat <- c(rnorm(1000, mean = 145, sd = 9))
 postTreat <- c(rnorm(1000, mean = 138, sd = 8))
 t.test(preTreat, postTreat, paired = TRUE)
 ```
+
+## Word clouds
+
+```{r cloud-libraries}
+library(tidyverse)
+library(wordcloud2)
+```
+
+
+### For Pick a Word
+
+Word cloud from the pick lists.
+
+```{r pick-cloud}
+pick_columns = df %>% select(8:28)
+pick_counts = colSums(pick_columns)
+pick_counts = as.table(pick_counts)
+wordcloud2(data = pick_counts)
+```
+
+### For Cloze Procedure
+
+Word cloud from the Anna Karenina extract.
+
+```{r cloze-cloud}
+cloze_words = as.vector(as.matrix(df[,c("q1", "q2", "q3", "q4", "q5")]))
+cloze_counts = table(cloze_words)
+wordcloud2(data = cloze_counts)
+```
+
