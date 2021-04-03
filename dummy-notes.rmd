@@ -2,11 +2,12 @@
 title: "Dummy Notes"
 author: "Collins"
 date: "02/04/2021"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+set.seed(1234) # for reproducibility 
 ```
 
 # Introduction
@@ -24,8 +25,8 @@ It is a trans-cultural experience which has a flexible definition.
 ## Import dummy data
 
 ```{r import}
-df <- read.csv("dummy-data.csv", header = TRUE)
-df[,'gender']<-factor(df[,'gender'])
+dummy_data <- read.csv("dummy-data.csv", header = TRUE)
+dummy_data[,'gender']<-factor(dummy_data[,'gender'])
 ```
 
 ## Take a look the participants
@@ -34,7 +35,7 @@ Gender balance.
 
 ```{r pie}
 library(ggplot2)
-ggplot(df, aes(x=factor(1), fill=gender))+
+ggplot(dummy_data, aes(x=factor(1), fill=gender))+
   geom_bar(width = 1)+
   coord_polar("y")
 ```
@@ -53,7 +54,8 @@ t.test(preTreat, postTreat, paired = TRUE)
 
 ```{r cloud-libraries}
 library(tidyverse)
-library(wordcloud2)
+library(RColorBrewer)
+library(wordcloud)
 ```
 
 
@@ -62,10 +64,12 @@ library(wordcloud2)
 Word cloud from the pick lists.
 
 ```{r pick-cloud}
-pick_columns = df %>% select(8:28)
+pick_columns = dummy_data %>% select(8:28)
 pick_counts = colSums(pick_columns)
-pick_counts = as.table(pick_counts)
-wordcloud2(data = pick_counts)
+pick_counts =  as.data.frame(as.table(pick_counts))
+wordcloud(words=pick_counts$Var1, freq=pick_counts$Freq,
+          max.words=12, random.order=FALSE,
+          min.freq=4, colors=brewer.pal(8, "Dark2"))
 ```
 
 ### For Cloze Procedure
@@ -73,8 +77,11 @@ wordcloud2(data = pick_counts)
 Word cloud from the Anna Karenina extract.
 
 ```{r cloze-cloud}
-cloze_words = as.vector(as.matrix(df[,c("q1", "q2", "q3", "q4", "q5")]))
+cloze_column = as.matrix(dummy_data[,c("q1", "q2", "q3", "q4", "q5")])
+cloze_words = as.vector(cloze_column)
 cloze_counts = table(cloze_words)
-wordcloud2(data = cloze_counts)
+cloze_counts = as.data.frame(cloze_counts)
+wordcloud(words=cloze_counts$cloze_words, freq=cloze_counts$Freq, 
+          colors=brewer.pal(8, "Dark2"))
 ```
 
