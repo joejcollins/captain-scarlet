@@ -17,5 +17,6 @@ install.packages(c(
     "stringi", 
     "stringr", 
     "tidyverse",
-    "tinytex", 
+    "tinytex",
+    "wordcloud2",
     "xfun"), lib="../.R/library")
