@@ -1,0 +1,76 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{fullpage} % for 1.5 cm margins
+\renewcommand{\familydefault}{\sfdefault} % so it doesn't look like LaTeX
+\usepackage{helvet}
+\usepackage[british]{isodate}
+\usepackage{abstract}
+\renewcommand{\abstractname}{Overview}
+\newlength{\mytextsize}
+\makeatletter
+  \setlength{\mytextsize}{\f@size pt}
+\makeatother
+\newcommand{\tickbox}{\framebox(12,12){} }
+\newcommand{\fillbox}[1][60]{\begin{tabular}{|l|}
+  \hspace{#1 pt} \\
+  \hline
+\end{tabular} }
+\usepackage{enumitem, amssymb} % for checklists
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\tickbox$, parsep=1em}
+\raggedright
+
+\usepackage{parskip}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Coffee, Cake, Culture and Cognition}
+\author{}
+\setcounter{tocdepth}{1}
+\begin{document}
+
+\begin{abstract}
+  Understanding your relationship to coffee.
+\end{abstract}
+
+
+
+\section{Rating Scales}
+
+
+
+\section{Cloze procedure}
+
+\begin{todolist}
+  \item Key Menu 1, 3, 2 to get to the Battery Test
+  \item UPS room locked
+\end{todolist}
+
+\section{Word Selection}
+
+\subsection{Positive}
+
+\begin{todolist}
+  \item Witty
+\end{todolist}
+
+\subsection{Negattive}
+
+\begin{todolist}
+  \item Reset the cleaner socket trip switch (so the temperature sensor comes on)
+  \item Is air conditioning running?
+  \item Server room locked
+  \item Return keys
+  \item Set dial to {\bf 0000}
+\end{todolist}
+
+Thank you this is actually about second language speakers.
+
+\section{Participant}
+
+\begin{todolist}
+  \item Second language \fillbox[300]
+  \item Age \fillbox years
+  \item Name \fillbox[300]
+  \item Date \fillbox \fillbox \fillbox
+\end{todolist}
+
+\end{document}
