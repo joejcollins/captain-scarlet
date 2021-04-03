@@ -3,7 +3,7 @@ FROM gitpod/workspace-full
 # Install LaTeX and R Server (R requires some additional packages for floating point arithmetic)
 RUN sudo apt-get -q update \
  && sudo apt-get install -yq texlive-latex-extra  \
- && sudo apt-get install -y r-base gdebi-core libmpfr-dev, r-cran-rcppeigen \
+ && sudo apt-get install -y r-base gdebi-core libmpfr-dev r-cran-rcppeigen \
  && wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1103-amd64.deb \
  && sudo gdebi -n rstudio-server-1.4.1103-amd64.deb \
  && sudo rm rstudio-server-1.4.1103-amd64.deb \
