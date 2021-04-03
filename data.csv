@@ -1,4 +1,4 @@
-name,age,gender,bilingual,q1,q2,q3,q4,q5,q6,q7,q8,q9,q10
+cold-hot,fat-thin,funny-sad,red-green,horrible-fantastic,stupid-intellectual,sparkling-still,Agreeable,Creative,Determined,Energetic,Funny,Polite,Kind,Arrogant,Cruel,Grumpy,Impatient,Jealous,Rude,Unhappy,Bold,Fierce,Meticulous,Restless,Sly,Talkative,Unpredictable,q1,q2,q3,q4,q5,name,age,language,gender
 alice,21,female,swedish,3,4,6,1,5,loyal,,,,
 bob,22,male,spanish,3,5,5,1,5,likeable,,,,
 carol,33,female,norwegian,3,5,5,2,5,happy,,,,

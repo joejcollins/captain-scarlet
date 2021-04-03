@@ -2,6 +2,8 @@
 \usepackage{fullpage} % for 1.5 cm margins
 \renewcommand{\baselinestretch}{1.50} % to increase line spacing
 \renewcommand{\familydefault}{\sfdefault} % so it doesn't look like LaTeX
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
 \usepackage{helvet}
 \usepackage{multicol}
 \usepackage[utf8]{inputenc}
@@ -117,66 +119,80 @@
 
 
 \begin{document}
-\pagestyle{empty}
-\setlength{\parindent}{0pt}
-\section*{Coffee Rating}
+\section*{Coffee Culture}
+
+Importance of coffee culture sharing with family, friends and business associates.
+
+History and origin of the stock exchange.
+
+Study to investigate the idea of coffee.
+
+\clearpage
+
+\subsection*{Coffee Rating}
 
 \Qq{Rate your idea of coffee on these scales:}
 
 \begin{tabular}{lrcl}
-    \Qq{} & red & \Qrating{7} & green \\
-    \Qq{} & cold & \Qrating{7} & hot \\
-    \Qq{} & fat & \Qrating{7} & thin \\
-    \Qq{} & funny & \Qrating{7} & sad \\
-    \Qq{} & horrible & \Qrating{7} & fantastic \\
-    \Qq{} & stupid & \Qrating{7} & intellectual \\  
+    \Qq{} & cold & \Qrating{7}      & hot \\
+    \Qq{} & fat & \Qrating{7}       & thin \\
+    \Qq{} & funny & \Qrating{7}     & sad \\
+    \Qq{} & red & \Qrating{7}       & green \\
+    \Qq{} & horrible & \Qrating{7}  & fantastic \\
+    \Qq{} & stupid & \Qrating{7}    & intellectual \\  
     \Qq{} & sparkling & \Qrating{7} & still \\  
 \end{tabular}
 
-\section*{Coffee Words}
+\subsection*{Coffee Words}
 
-\Qq{Which of these words could be applied to your idea of coffee and cake?}
+\Qq{Which of these words could be applied to your idea of coffee?}
 \begin{multicols}{3}
     \begin{Qlist}
-        \item loyal
-        \item likeable
-        \item happy
-        \item green
-        \item sad
-        \item inventive
-        \item reliable
+        \item Agreeable
+        \item Creative
+        \item Determined
+        \item Energetic
+        \item Funny
+        \item Polite
+        \item Kind
     \end{Qlist}
     \begin{Qlist}
-        \item loyal
-        \item likeable
-        \item happy
-        \item green
-        \item sad
-        \item inventive
-        \item reliable
+        \item Arrogant
+        \item Cruel
+        \item Grumpy
+        \item Impatient
+        \item Jealous
+        \item Rude
+        \item Unhappy
     \end{Qlist}
     \begin{Qlist}
-        \item loyal
-        \item likeable
-        \item happy
-        \item green
-        \item sad
-        \item inventive
-        \item reliable
+        \item Bold
+        \item Fierce
+        \item Meticulous
+        \item Restless
+        \item Sly
+        \item Talkative
+        \item Unpredictable
     \end{Qlist}
 \end{multicols}
 
-\section*{Coffee in Culture}
+\subsection*{Coffee in Culture}
 
+From Tolstoy's `Anna Karenina' \ldots
+
+\begin{quote}
 Baroness Shilton, a friend of Petritsky’s, with a \Qline{3cm} face and \Qline{3cm} hair, resplendent in a \Qline{3cm} gown, 
 and filling the whole room, like a \Qline{3cm}, with her \Qline{3cm} chatter, sat at the round table making coffee.
+\end{quote}
 
-\section*{About you}
+\subsection*{About you}
 
 \Qq{Your name}: \Qline{12cm}
 
 \Qq{How old are you?} I am \Qline{2cm} years old.
 
 \Qq{Do you speak another language?} \hfil \QO{} no \hfil \QO{} yes, I also speak: \Qline{4cm}
+
+\Qq{Which gender?} \QO{} male \QO{} female. 
 
 \end{document}
