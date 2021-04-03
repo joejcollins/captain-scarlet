@@ -1,6 +1,6 @@
 ---
-title: "Notes"
-author: "Joe Collins"
+title: "Coffee, Cake, Culture and Cognition"
+author: "Collins"
 date: "02/04/2021"
 output: pdf_document
 ---
@@ -8,6 +8,18 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Introduction
+
+Hypothesis: 
+People with a second language have a broader definitions
+because they are able to add definitions from another language.
+Having broader definitions may mean that second language speaks
+are able to find relationships between concepts
+that single language speakers are unable to find.
+
+Why choose coffee and cake?
+It is a trans-cultural experience which has a flexible definition.
 
 ## Import dummy data
 
@@ -18,8 +30,13 @@ df[,'gender']<-factor(df[,'gender'])
 
 ## Take a look
 
-```{r import}
-pie(df$gender, main="Pie Chart of Genders")
+Ensure that the sample is balanced.
+
+```{r pie}
+library(ggplot2)
+ggplot(df, aes(x=factor(1), fill=gender))+
+  geom_bar(width = 1)+
+  coord_polar("y")
 ```
 
 ## T Test
@@ -30,11 +47,4 @@ set.seed(2820)
 preTreat <- c(rnorm(1000, mean = 145, sd = 9))
 postTreat <- c(rnorm(1000, mean = 138, sd = 8))
 t.test(preTreat, postTreat, paired = TRUE)
-```
-
-```{r gshit}
-ggbetweenstats(
-     x = preTreat,
-     y = postTreat,
-     title = "Distribution of sepal length across Iris species")
 ```

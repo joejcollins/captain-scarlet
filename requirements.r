@@ -16,5 +16,6 @@ install.packages(c(
     "rmarkdown", 
     "stringi", 
     "stringr", 
+    "tidyverse",
     "tinytex", 
     "xfun"), lib="../.R/library")
