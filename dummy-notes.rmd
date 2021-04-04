@@ -6,20 +6,23 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(fig.width=8, fig.height=5) 
 set.seed(1234) # for reproducibility 
 ```
 
 # Introduction
 
-Hypothesis: 
+## Hypothesis 
+
 People with a second language have a broader definitions
 because they are able to add definitions from another language.
 Having broader definitions may mean that second language speaks
 are able to find relationships between concepts
 that single language speakers are unable to find.
 
-Why choose coffee and cake?
+## Why choose coffee and cake?
+
 It is a trans-cultural experience which has a flexible definition.
 
 ## Import dummy data
@@ -31,14 +34,31 @@ dummy_data[,'gender']<-factor(dummy_data[,'gender'])
 
 ## Take a look the participants
 
-Gender balance.
 
-```{r pie}
-library(ggplot2)
-ggplot(dummy_data, aes(x=factor(1), fill=gender))+
-  geom_bar(width = 1)+
-  coord_polar("y")
+### Age distribution
+
+```{r ages}
+mean_age = mean(dummy_data$age, trim = 0, na.rm = FALSE)
+hist(dummy_data$age)
 ```
+
+Average age is ``r mean_age`` but skewed towards the younger age groups.
+
+### Gender balance
+
+```{r gender}
+gender = table(dummy_data$gender)
+pie(gender)
+```
+
+The sample was selected to be gender balanced.
+
+```{r languages}
+languages <- table(dummy_data$language)
+languages
+```
+
+No language repeats.  Mostly North European.
 
 ## T Test
 
