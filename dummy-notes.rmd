@@ -1,5 +1,5 @@
 ---
-title: "Dummy Notes"
+title: "Dummy Data Demo Notes"
 author: "Collins"
 date: "02/04/2021"
 output: pdf_document
@@ -60,15 +60,62 @@ languages
 
 No language repeats.  Mostly North European.
 
-## T Test
+## Are the two groups different?
 
+Sum up the multiple select so we know the total number of words each participant
+selected.
+Then split the data into those who speak a second language and those that do no.
 
-```{r ttest}
-set.seed(2820)
-preTreat <- c(rnorm(1000, mean = 145, sd = 9))
-postTreat <- c(rnorm(1000, mean = 138, sd = 8))
-t.test(preTreat, postTreat, paired = TRUE)
+```{r split}
+dummy_data$total_selected = rowSums(dummy_data[,c("Agreeable", "Creative",
+                                                  "Determined", "Energetic",
+                                                  "Funny", "Polite", "Kind",
+                                                  "Arrogant", "Cruel", "Grumpy",
+                                                  "Impatient", "Jealous",
+                                                  "Rude", "Unhappy", "Bold",
+                                                  "Fierce", "Meticulous",
+                                                  "Restless", "Sly",
+                                                  "Talkative", "Unpredictable")])
+monolinguals = dummy_data[dummy_data$language == 0, ]
+bilinguals = dummy_data[dummy_data$language != 0, ]
 ```
+### Difference in Rating
+
+Or do bilinguals and monolinguals rate coffee and cake differently.
+Or do they hold difference concepts of coffee and cake.
+Using T test because the sample size is so small.
+This assumes that the two groups are normally distributed
+and the variances of the two groups are equal.
+
+```{r ratings}
+t.test(bilinguals$cold.hot, monolinguals$cold.hot, paired = FALSE)
+t.test(bilinguals$fat.thin, monolinguals$fat.thin, paired = FALSE)
+t.test(bilinguals$funny.sad, monolinguals$funny.sad, paired = FALSE)
+t.test(bilinguals$red.green, monolinguals$red.green, paired = FALSE)
+t.test(bilinguals$horrible.fantastic, monolinguals$horrible.fantastic, paired = FALSE)
+t.test(bilinguals$stupid.intellectual, monolinguals$stupid.intellectual, paired = FALSE)
+t.test(bilinguals$sparkling.still, monolinguals$sparkling.still, paired = FALSE)
+```
+
+Monolinguals and bilinguals rate coffee and cake similarly for cold.hot, red.green and horrible.fantastic.
+However they rate coffee and cake differently for fat.thin, funny.sad, stupid.intellectual and sparkling.still.
+So in some areas it appear that the two groups hold different concepts of coffee and cake,
+but overlap in other areas.
+Who knows what this means because it is all made up rubbish.
+
+### Difference in Totals
+
+If the hypothesis is correct that bilinguals have a broader concept of coffee and cake,
+then one would expect them to select more words from the constrained word list.
+
+```{r multiple-select}
+t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE)
+
+```
+
+There is a big difference in means, so it is significant.
+Looks like bilinguals have a bigger concept of coffee and cake.
+At least in this fake data.
 
 ## Word clouds
 
@@ -81,7 +128,7 @@ library(wordcloud)
 
 ### For Pick a Word
 
-Word cloud from the pick lists.
+Word cloud from the multiple select list.
 
 ```{r pick-cloud}
 pick_columns = dummy_data %>% select(8:28)
