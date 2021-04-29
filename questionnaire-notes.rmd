@@ -42,7 +42,8 @@ mean_age = mean(questionnaire_data$age, trim = 0, na.rm = FALSE)
 hist(questionnaire_data$age)
 ```
 
-Average age is ``r mean_age`` but skewed towards the younger age groups.
+Average age is ``r mean_age``.
+Largely middle aged sample.
 
 ### Gender balance
 
@@ -58,7 +59,7 @@ languages <- table(questionnaire_data$language)
 languages
 ```
 
-No language repeats.  Mostly North European.
+Mostly North European.
 
 ## Are the two groups different?
 
@@ -76,8 +77,8 @@ questionnaire_data$total_selected = rowSums(questionnaire_data[,c("Agreeable", "
                                                   "Fierce", "Meticulous",
                                                   "Restless", "Sly",
                                                   "Talkative", "Unpredictable")])
-monolinguals = questionnaire_data[questionnaire_data$language == 0, ]
-bilinguals = questionnaire_data[questionnaire_data$language != 0, ]
+monolinguals = questionnaire_data[questionnaire_data$bilingual == 0, ]
+bilinguals = questionnaire_data[questionnaire_data$bilingual != 0, ]
 ```
 ### Difference in Rating
 
@@ -88,7 +89,6 @@ This assumes that the two groups are normally distributed
 and the variances of the two groups are equal.
 
 ```{r ratings}
-t.test(bilinguals$cold.hot, monolinguals$cold.hot, paired = FALSE)
 t.test(bilinguals$fat.thin, monolinguals$fat.thin, paired = FALSE)
 t.test(bilinguals$funny.sad, monolinguals$funny.sad, paired = FALSE)
 t.test(bilinguals$red.green, monolinguals$red.green, paired = FALSE)
@@ -97,11 +97,8 @@ t.test(bilinguals$stupid.intellectual, monolinguals$stupid.intellectual, paired 
 t.test(bilinguals$sparkling.still, monolinguals$sparkling.still, paired = FALSE)
 ```
 
-Monolinguals and bilinguals rate coffee and cake similarly for cold.hot, red.green and horrible.fantastic.
-However they rate coffee and cake differently for fat.thin, funny.sad, stupid.intellectual and sparkling.still.
-So in some areas it appear that the two groups hold different concepts of coffee and cake,
-but overlap in other areas.
-Who knows what this means because it is all made up rubbish.
+There is no significant difference in how monolinguals and bilinguals rated
+their coffee and cake experience.
 
 ### Difference in Totals
 
@@ -115,7 +112,6 @@ t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE)
 
 There is a big difference in means, so it is significant.
 Looks like bilinguals have a bigger concept of coffee and cake.
-At least in this fake data.
 
 ## Word clouds
 
@@ -129,6 +125,7 @@ library(wordcloud)
 ### For Pick a Word
 
 Word cloud from the multiple select list.
+Showing consistently selecting the positive words.
 
 ```{r pick-cloud}
 pick_columns = questionnaire_data %>% select(8:28)
