@@ -1,0 +1,154 @@
+---
+title: "Dummy Data Demo Notes"
+author: "Collins"
+date: "02/04/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(fig.width=8, fig.height=5) 
+set.seed(1234) # for reproducibility 
+```
+
+# Introduction
+
+## Hypothesis 
+
+People with a second language have a broader definitions
+because they are able to add definitions from another language.
+Having broader definitions may mean that second language speaks
+are able to find relationships between concepts
+that single language speakers are unable to find.
+
+## Why choose coffee and cake?
+
+It is a trans-cultural experience which has a flexible definition.
+
+## Import dummy data
+
+```{r import}
+questionnaire_data <- read.csv("questionnaire-data.csv", header = TRUE)
+questionnaire_data[,'gender']<-factor(questionnaire_data[,'gender'])
+```
+
+## Take a look the participants
+
+
+### Age distribution
+
+```{r ages}
+mean_age = mean(questionnaire_data$age, trim = 0, na.rm = FALSE)
+hist(questionnaire_data$age)
+```
+
+Average age is ``r mean_age`` but skewed towards the younger age groups.
+
+### Gender balance
+
+```{r gender}
+gender = table(questionnaire_data$gender)
+pie(gender)
+```
+
+The sample was selected to be gender balanced.
+
+```{r languages}
+languages <- table(questionnaire_data$language)
+languages
+```
+
+No language repeats.  Mostly North European.
+
+## Are the two groups different?
+
+Sum up the multiple select so we know the total number of words each participant
+selected.
+Then split the data into those who speak a second language and those that do no.
+
+```{r split}
+questionnaire_data$total_selected = rowSums(questionnaire_data[,c("Agreeable", "Creative",
+                                                  "Determined", "Energetic",
+                                                  "Funny", "Polite", "Kind",
+                                                  "Arrogant", "Cruel", "Grumpy",
+                                                  "Impatient", "Jealous",
+                                                  "Rude", "Unhappy", "Bold",
+                                                  "Fierce", "Meticulous",
+                                                  "Restless", "Sly",
+                                                  "Talkative", "Unpredictable")])
+monolinguals = questionnaire_data[questionnaire_data$language == 0, ]
+bilinguals = questionnaire_data[questionnaire_data$language != 0, ]
+```
+### Difference in Rating
+
+Or do bilinguals and monolinguals rate coffee and cake differently.
+Or do they hold difference concepts of coffee and cake.
+Using T test because the sample size is so small.
+This assumes that the two groups are normally distributed
+and the variances of the two groups are equal.
+
+```{r ratings}
+t.test(bilinguals$cold.hot, monolinguals$cold.hot, paired = FALSE)
+t.test(bilinguals$fat.thin, monolinguals$fat.thin, paired = FALSE)
+t.test(bilinguals$funny.sad, monolinguals$funny.sad, paired = FALSE)
+t.test(bilinguals$red.green, monolinguals$red.green, paired = FALSE)
+t.test(bilinguals$horrible.fantastic, monolinguals$horrible.fantastic, paired = FALSE)
+t.test(bilinguals$stupid.intellectual, monolinguals$stupid.intellectual, paired = FALSE)
+t.test(bilinguals$sparkling.still, monolinguals$sparkling.still, paired = FALSE)
+```
+
+Monolinguals and bilinguals rate coffee and cake similarly for cold.hot, red.green and horrible.fantastic.
+However they rate coffee and cake differently for fat.thin, funny.sad, stupid.intellectual and sparkling.still.
+So in some areas it appear that the two groups hold different concepts of coffee and cake,
+but overlap in other areas.
+Who knows what this means because it is all made up rubbish.
+
+### Difference in Totals
+
+If the hypothesis is correct that bilinguals have a broader concept of coffee and cake,
+then one would expect them to select more words from the constrained word list.
+
+```{r multiple-select}
+t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE)
+
+```
+
+There is a big difference in means, so it is significant.
+Looks like bilinguals have a bigger concept of coffee and cake.
+At least in this fake data.
+
+## Word clouds
+
+```{r cloud-libraries}
+library(tidyverse)
+library(RColorBrewer)
+library(wordcloud)
+```
+
+
+### For Pick a Word
+
+Word cloud from the multiple select list.
+
+```{r pick-cloud}
+pick_columns = questionnaire_data %>% select(8:28)
+pick_counts = colSums(pick_columns)
+pick_counts =  as.data.frame(as.table(pick_counts))
+wordcloud(words=pick_counts$Var1, freq=pick_counts$Freq,
+          max.words=12, random.order=FALSE,
+          min.freq=4, colors=brewer.pal(8, "Dark2"))
+```
+
+### For Cloze Procedure
+
+Word cloud from the Anna Karenina extract.
+
+```{r cloze-cloud}
+cloze_column = as.matrix(questionnaire_data[,c("q1", "q2", "q3", "q4", "q5")])
+cloze_words = as.vector(cloze_column)
+cloze_counts = table(cloze_words)
+cloze_counts = as.data.frame(cloze_counts)
+wordcloud(words=cloze_counts$cloze_words, freq=cloze_counts$Freq, 
+          colors=brewer.pal(8, "Dark2"))
+```
+
