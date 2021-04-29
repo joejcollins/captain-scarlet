@@ -104,13 +104,18 @@ their coffee and cake experience.
 
 If the hypothesis is correct that bilinguals have a broader concept of coffee and cake,
 then one would expect them to select more words from the constrained word list.
+The expectation is that the bilingual mean will be greater,
+so this is a one-tailed test.
+
 
 ```{r multiple-select}
-t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE)
+bilingual_selected = mean(bilinguals$total_selected, trim = 0, na.rm = FALSE)
+monolingual_selected = mean(monolinguals$total_selected, trim = 0, na.rm = FALSE)
+t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE, alternative = "greater")
 
 ```
 
-There is a big difference in means, so it is significant.
+There is a big difference in means, significant at a 90% level.
 Looks like bilinguals have a bigger concept of coffee and cake.
 
 ## Word clouds
