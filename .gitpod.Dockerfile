@@ -1,4 +1,4 @@
-FROM gitpod/workspace-base
+FROM gitpod/workspace-full
 
 # Install LaTeX and R Server (R requires some additional packages for floating point arithmetic)
 RUN sudo apt-get -q update \
