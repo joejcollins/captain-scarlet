@@ -1,59 +1,49 @@
 ---
-title: "Dummy Data Demo Notes"
-author: "Collins"
-date: "02/04/2021"
+title: "Questionnaire Results"
 output: pdf_document
 ---
+> To have another language is to possess a second soul - Charlemagne
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(fig.width=8, fig.height=5) 
-set.seed(1234) # for reproducibility 
-```
-
-# Introduction
-
-> To have another language is to possess a second soul.
-
-Charlemagne
-
-## Hypothesis 
+# Hypothesis 
 
 People with a second language have a broader definitions
 because they are able to add definitions from another language.
-Having broader definitions may mean that second language speaks
-are able to find relationships between concepts
-that single language speakers are unable to find.
 
 ## Why choose coffee and cake?
 
-It is a trans-cultural experience which has a flexible definition.
+It is a cross-cultural experience which has a flexible definition.
 
-## Import dummy data
-
-```{r import}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(fig.width=7, fig.height=4.5) 
+set.seed(1234) # for reproducibility 
 questionnaire_data <- read.csv("questionnaire-data.csv", header = TRUE)
 questionnaire_data[,'gender']<-factor(questionnaire_data[,'gender'])
 ```
 
-## Take a look the participants
-
-
-### Age distribution
+# Take a look the participants
 
 ```{r ages}
 mean_age = mean(questionnaire_data$age, trim = 0, na.rm = FALSE)
-hist(questionnaire_data$age)
+hist(questionnaire_data$age, 
+     main="Age Distribution", 
+     xlab="Age in Years", 
+     ylab="Count",
+     col="darkmagenta",
+     freq=TRUE
+     )
 ```
 
-Average age is ``r mean_age``.
+Average age is ``r round(mean_age, digits = 1)``.
 Largely middle aged sample.
-
-### Gender balance
 
 ```{r gender}
 gender = table(questionnaire_data$gender)
-pie(gender)
+pie(gender, 
+    c("Female", "Male"),
+    main = "Gender Balance", 
+    col = rainbow(length(gender))
+    )
 ```
 
 The sample was selected to be gender balanced.
@@ -63,28 +53,30 @@ languages <- table(questionnaire_data$language)
 languages
 ```
 
-Mostly North European.
+Mostly North European languages with strong coffee and cake cultures
 
-## Are the two groups different?
+# Are the two groups different?
 
-Sum up the multiple select so we know the total number of words each participant
-selected.
-Then split the data into those who speak a second language and those that do no.
+Sum up the multiple select
+so we know the total number of words each participant selected.
+Then split the data into those who speak a second language and those that do not.
 
 ```{r split}
-questionnaire_data$total_selected = rowSums(questionnaire_data[,c("Agreeable", "Creative",
-                                                  "Determined", "Energetic",
-                                                  "Funny", "Polite", "Kind",
-                                                  "Arrogant", "Cruel", "Grumpy",
-                                                  "Impatient", "Jealous",
-                                                  "Rude", "Unhappy", "Bold",
-                                                  "Fierce", "Meticulous",
-                                                  "Restless", "Sly",
-                                                  "Talkative", "Unpredictable")])
+questionnaire_data$total_selected = rowSums(questionnaire_data[,c(
+    "Agreeable", "Creative","Determined", "Energetic","Funny", "Polite", "Kind",
+    "Arrogant", "Cruel", "Grumpy", "Impatient", "Jealous","Rude", "Unhappy",
+    "Bold", "Fierce", "Meticulous", "Restless", "Sly", "Talkative", "Unpredictable")])
+questionnaire_data$total_selected_positive = rowSums(questionnaire_data[,c(
+    "Agreeable", "Creative","Determined", "Energetic","Funny", "Polite", "Kind")])
+questionnaire_data$total_selected_negative = rowSums(questionnaire_data[,c(
+    "Arrogant", "Cruel", "Grumpy", "Impatient", "Jealous","Rude", "Unhappy")])
+questionnaire_data$total_selected_neutral = rowSums(questionnaire_data[,c(
+    "Bold", "Fierce", "Meticulous", "Restless", "Sly", "Talkative", "Unpredictable")])
 monolinguals = questionnaire_data[questionnaire_data$bilingual == 0, ]
 bilinguals = questionnaire_data[questionnaire_data$bilingual != 0, ]
 ```
-### Difference in Rating
+
+## Difference in Rating
 
 Or do bilinguals and monolinguals rate coffee and cake differently.
 Or do they hold difference concepts of coffee and cake.
@@ -104,23 +96,39 @@ t.test(bilinguals$sparkling.still, monolinguals$sparkling.still, paired = FALSE)
 There is no significant difference in how monolinguals and bilinguals rated
 their coffee and cake experience.
 
-### Difference in Totals
+## Difference in Totals
 
-If the hypothesis is correct that bilinguals have a broader concept of coffee and cake,
+If the hypothesis is correct that bilinguals have
+a broader concept of coffee and cake,
 then one would expect them to select more words from the constrained word list.
 The expectation is that the bilingual mean will be greater,
 so this is a one-tailed test.
 
 
 ```{r multiple-select}
-bilingual_selected = mean(bilinguals$total_selected, trim = 0, na.rm = FALSE)
-monolingual_selected = mean(monolinguals$total_selected, trim = 0, na.rm = FALSE)
-t.test(bilinguals$total_selected, monolinguals$total_selected, paired = FALSE, alternative = "greater")
-
+t.test(bilinguals$total_selected, monolinguals$total_selected,
+       paired=FALSE, alternative="greater")
 ```
 
-There is a big difference in means, significant at a 90% level.
-Looks like bilinguals have a bigger concept of coffee and cake.
+Indeed there is a significant difference between
+the monolinguals and the bilinguals,
+in the total number of words selected.
+Bilinguals choosing an expanded list.
+
+The words were grouped into positive, negative and neutral words.
+The difference in the number of words selected
+was not significant for the negative and neutral words,
+but was for the positive words.
+
+```{r multiple-select-positive}
+t.test(bilinguals$total_selected_positive,
+       monolinguals$total_selected_positive,
+       paired=FALSE, alternative="greater")
+```
+
+This is what drives the significant difference in the total number
+of words selected.
+
 
 ## Word clouds
 
@@ -157,4 +165,6 @@ cloze_counts = as.data.frame(cloze_counts)
 wordcloud(words=cloze_counts$cloze_words, freq=cloze_counts$Freq, 
           colors=brewer.pal(8, "Dark2"))
 ```
+
+The only word that was repeated was Red.
 
