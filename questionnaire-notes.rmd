@@ -13,6 +13,10 @@ set.seed(1234) # for reproducibility
 
 # Introduction
 
+> To have another language is to possess a second soul.
+
+Charlemagne
+
 ## Hypothesis 
 
 People with a second language have a broader definitions
