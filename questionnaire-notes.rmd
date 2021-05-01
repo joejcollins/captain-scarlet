@@ -1,8 +1,8 @@
 ---
 title: "Coffee, Cake and Culture"
 output:
-  word_document: default
   pdf_document: default
+  word_document: default
 ---
 > To have another language is to possess a second soul - Charlemagne
 
@@ -162,7 +162,7 @@ their experience similarly.
 ```{r}
 # Double histogram for comparing the rating scales
 library("colorspace") # for lighten and darken
-double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue") 
+rating.double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue") 
 {
     par(mfrow=c(1,2))    # set the plotting area into a 1*2 array
     monolingual.breaks <- seq(min(monolingual.scale)-0.5, max(monolingual.scale)+0.5, by=1)
@@ -193,101 +193,117 @@ double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue")
 ### Hot-Cold
 
 ```{r}
-double.histogram(monolinguals$cold.hot, bilinguals$cold.hot, "violet")
+rating.double.histogram(monolinguals$cold.hot, bilinguals$cold.hot, "violet")
 var.test(monolinguals$cold.hot, bilinguals$cold.hot, alternative = "two.sided")
 ```
 
 ### Fat-Thin
 
 ```{r}
-double.histogram(monolinguals$fat.thin, bilinguals$fat.thin, "purple")
+rating.double.histogram(monolinguals$fat.thin, bilinguals$fat.thin, "purple")
 var.test(monolinguals$fat.thin, bilinguals$fat.thin, alternative = "two.sided")
 ```
 
 ### Funny-Sad
 
 ```{r}
-double.histogram(monolinguals$funny.sad, bilinguals$funny.sad, "blue")
+rating.double.histogram(monolinguals$funny.sad, bilinguals$funny.sad, "blue")
 var.test(monolinguals$funny.sad, bilinguals$funny.sad, alternative = "two.sided")
 ```
 
 ### Red-Green
 
 ```{r}
-double.histogram(monolinguals$red.green, bilinguals$red, "green")
+rating.double.histogram(monolinguals$red.green, bilinguals$red, "green")
 var.test(monolinguals$red.green, bilinguals$red, alternative = "two.sided")
 ```
 
 ### Horrible-Fantastic
 
 ```{r}
-double.histogram(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, "yellow")
+rating.double.histogram(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, "yellow")
 var.test(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, alternative = "two.sided")
 ```
 
 ### Stupid-Intellectual
 
 ```{r}
-double.histogram(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, "orange")
+rating.double.histogram(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, "orange")
 var.test(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, alternative = "two.sided")
 ```
 
 ### Sparkling-Still
 
 ```{r}
-double.histogram(monolinguals$sparkling.still, bilinguals$sparkling, "red")
+rating.double.histogram(monolinguals$sparkling.still, bilinguals$sparkling, "red")
 var.test(monolinguals$sparkling.still, bilinguals$sparkling, alternative = "two.sided")
 ```
 
-## 
+## Word Assignment
 
-If the hypothesis is correct that bilinguals have
-a broader concept of coffee and cake,
-then one would expect them to select more words from the constrained word list.
-The expectation is that the bilingual mean will be greater,
-so this is a one-tailed test.
+It was readily apparent during the administration of the questionnaires,
+that the participants could easily determine which word
+could be applied to their coffee and cake experience.
 
+If the hypothesis is correct that those with a second language would have
+a broader concept of coffee and cake.
+As a result one would expect them to select more words from the word list
+to reflect their broader concept.
 
-```{r multiple-select}
-t.test(bilinguals$total_selected, monolinguals$total_selected,
-       paired=FALSE, alternative="greater")
+Taking the total number of words selected
+it is clear that those with a second language consistently selected
+more words than those without a second language.
+
+```{r}
+assignment.double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue") 
+{
+    par(mfrow=c(1,2))    # set the plotting area into a 1*2 array
+    monolingual.breaks <- seq(min(monolingual.scale)-0.5, max(monolingual.scale)+0.5, by=1)
+    monolingual.colour <- lighten(colour, 0.4)
+    hist(monolingual.scale,
+         breaks=monolingual.breaks,
+         col=monolingual.colour,
+         freq=TRUE,
+         main="No Second Language",
+         xlab="",
+         xlim=c(1,12),
+         ylim=c(0,4)
+         )
+    bilingual.breaks <- seq(min(bilingual.scale)-0.5, max(bilingual.scale)+0.5, by=1)
+    bilingual.colour <- darken(colour, 0.4)
+    hist(bilingual.scale,
+         breaks=bilingual.breaks,
+         col=bilingual.colour,
+         freq=TRUE,
+         main="With Second Language",
+         xlab="",
+         xlim=c(1,12),
+         ylim=c(0,4)
+         )
+}
+assignment.double.histogram(monolinguals$total_selected, bilinguals$total_selected)
 ```
 
-Indeed there is a significant difference between
-the monolinguals and the bilinguals,
-in the total number of words selected.
-Bilinguals choosing an expanded list.
+The average for those with a second language was ``r mean(bilinguals$total_selected)``
+where as for those without a second language the average was
+``r mean(monolinguals$total_selected)``.
+Using an F-test this is confirmed to be a statistically significant difference.
 
-The words were grouped into positive, negative and neutral words.
-The difference in the number of words selected
-was not significant for the negative and neutral words,
-but was for the positive words.
-
-```{r multiple-select-positive}
-t.test(bilinguals$total_selected_positive,
-       monolinguals$total_selected_positive,
-       paired=FALSE, alternative="greater")
+```{r}
+var.test(bilinguals$total_selected, monolinguals$total_selected, alternative = "two.sided")
 ```
+### Word Cloud
 
-This is what drives the significant difference in the total number
-of words selected.
+Looking at word cloud of the most popular words choosen,
+it appears that the positive words were favoured over the negative and neutral words.
+It is clear that all the participants
+have a positive conceptualization of their coffee and cake experience.
 
-
-## Word clouds
-
-```{r cloud-libraries}
+```{r}
 library(tidyverse)
 library(RColorBrewer)
 library(wordcloud)
-```
-
-
-### For Pick a Word
-
-Word cloud from the multiple select list.
-Showing consistently selecting the positive words.
-
-```{r pick-cloud}
+library(dplyr)
 pick_columns = questionnaire_data %>% select(8:28)
 pick_counts = colSums(pick_columns)
 pick_counts =  as.data.frame(as.table(pick_counts))
@@ -296,18 +312,46 @@ wordcloud(words=pick_counts$Var1, freq=pick_counts$Freq,
           min.freq=4, colors=brewer.pal(8, "Dark2"))
 ```
 
-### For Cloze Procedure
+### Positive Words
 
-Word cloud from the Anna Karenina extract.
+Indeed it is clear that the difference between
+those with a second language and those without
+is driven by the positive words.
+This is demonstrated to be statistically significant using an F-test.
 
-```{r cloze-cloud}
-cloze_column = as.matrix(questionnaire_data[,c("q1", "q2", "q3", "q4", "q5")])
-cloze_words = as.vector(cloze_column)
-cloze_counts = table(cloze_words)
-cloze_counts = as.data.frame(cloze_counts)
-wordcloud(words=cloze_counts$cloze_words, freq=cloze_counts$Freq, 
-          colors=brewer.pal(8, "Dark2"))
+```{r}
+assignment.double.histogram(monolinguals$total_selected_positive, bilinguals$total_selected_positive)
+var.test(monolinguals$total_selected_positive, bilinguals$total_selected_positive, alternative = "two.sided")
 ```
 
-The only word that was repeated was Red.
+### Neutral Words
+
+However there is no significant difference between the two groups
+based on their selections of neutral words.
+
+```{r}
+assignment.double.histogram(monolinguals$total_selected_neutral, bilinguals$total_selected_neutral, "red")
+var.test(monolinguals$total_selected_neutral, bilinguals$total_selected_neutral, alternative = "two.sided")
+```
+
+Neither group selected sufficient of the negative words to draw any inferences.
+
+It is apparent that the group of participants with a second language
+did select more positive words to describe their coffee and cake
+experience that those without a second language.
+
+### For Cloze Procedure
+
+Completing the Cloze procedure was clearly those most challenging task
+for all the participants in the study.
+None of them was sufficiently familiar with the extract from 
+'Anna Karenina' to complete the original sentence
+and 
+all the participants required a great deal of encouragement.
+Only one word was chosen by two different participants (red)
+but it is hard to ascribe anything meaningful to this result.
+One is forced to conclude that most of the participants
+simply choose a random word it order to be able to complete the task
+and that any priming concerning coffee and cake
+was overwhelmed by a desire to complete the task.
 
