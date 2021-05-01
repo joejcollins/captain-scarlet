@@ -1,6 +1,8 @@
 ---
 title: "Coffee, Cake and Culture"
-output: pdf_document
+output:
+  word_document: default
+  pdf_document: default
 ---
 > To have another language is to possess a second soul - Charlemagne
 
@@ -141,21 +143,38 @@ providing more variable ratings for their coffee and cake experience.
 Whilst those with a single language might consistently
 rate their coffee and cake experience at one end of the scale.
 
+As can see seen below,
+in every case there is little or nothing to distinguish between
+the two groups of participants.
+This is confirmed by means of an F-test.
+
+It may be that participants were choosing a random number to be able to answer the question.
+However, this was not evident during the administration of the questionnaire.
+Each of the participants appear to give the rating scales some thoughtful consideration.
+This is born out in the distributions shows below,
+in that they do not appear to be random
+and the two groups of participants appear to be consistent.
+
+It would seem that when forced to rate their coffee and cake experience,
+both those with a second language and those without rate
+their experience similarly.
+
 ```{r}
 # Double histogram for comparing the rating scales
 library("colorspace") # for lighten and darken
 double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue") 
 {
+    par(mfrow=c(1,2))    # set the plotting area into a 1*2 array
     monolingual.breaks <- seq(min(monolingual.scale)-0.5, max(monolingual.scale)+0.5, by=1)
     monolingual.colour <- lighten(colour, 0.4)
     hist(monolingual.scale,
          breaks=monolingual.breaks,
          col=monolingual.colour,
          freq=TRUE,
-         main="",
+         main="No Second Language",
          xlab="",
          xlim=c(1,7),
-         ylim=c(1,5)
+         ylim=c(0,4)
          )
     bilingual.breaks <- seq(min(bilingual.scale)-0.5, max(bilingual.scale)+0.5, by=1)
     bilingual.colour <- darken(colour, 0.4)
@@ -163,92 +182,64 @@ double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue")
          breaks=bilingual.breaks,
          col=bilingual.colour,
          freq=TRUE,
-         main="",
+         main="With Second Language",
          xlab="",
          xlim=c(1,7),
-         ylim=c(1,5)
+         ylim=c(0,4)
          )
 }
 ```
 
-### Hot Cold
+### Hot-Cold
 
 ```{r}
 double.histogram(monolinguals$cold.hot, bilinguals$cold.hot, "violet")
+var.test(monolinguals$cold.hot, bilinguals$cold.hot, alternative = "two.sided")
 ```
 
-### Fat Thin
+### Fat-Thin
 
 ```{r}
 double.histogram(monolinguals$fat.thin, bilinguals$fat.thin, "purple")
+var.test(monolinguals$fat.thin, bilinguals$fat.thin, alternative = "two.sided")
 ```
 
-### Funny Sad
+### Funny-Sad
 
 ```{r}
 double.histogram(monolinguals$funny.sad, bilinguals$funny.sad, "blue")
+var.test(monolinguals$funny.sad, bilinguals$funny.sad, alternative = "two.sided")
 ```
 
-### Red Green
+### Red-Green
 
 ```{r}
 double.histogram(monolinguals$red.green, bilinguals$red, "green")
+var.test(monolinguals$red.green, bilinguals$red, alternative = "two.sided")
 ```
 
-### Horrible Fantastic
+### Horrible-Fantastic
 
 ```{r}
 double.histogram(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, "yellow")
+var.test(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, alternative = "two.sided")
 ```
 
-### Stupid Intellectual
+### Stupid-Intellectual
 
 ```{r}
 double.histogram(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, "orange")
+var.test(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, alternative = "two.sided")
 ```
 
-### Sparkling Still
+### Sparkling-Still
 
 ```{r}
 double.histogram(monolinguals$sparkling.still, bilinguals$sparkling, "red")
+var.test(monolinguals$sparkling.still, bilinguals$sparkling, alternative = "two.sided")
 ```
 
-
-```{r}
-var.test(monolinguals$funny.sad, bilinguals$funny.sad, alternative = "two.sided")
-t.test(bilinguals$fat.thin, monolinguals$fat.thin, paired = FALSE)
-
-```
-
-```{r ratings-funny-sad}
-var.test(monolinguals$fat.thin, bilinguals$fat.thin, alternative = "two.sided")
-t.test(bilinguals$funny.sad, monolinguals$funny.sad, paired = FALSE)
-hist(monolinguals$funny.sad, 
-     main="Fat to Thin Rating", 
-     ylab="Count",
-     ylim=c(1,7),
-     xlim=c(1,7),
-     col="darkmagenta",
-     freq=TRUE
-     )
-hist(bilinguals$funny.sad, 
-     main="Fat to Thin Rating", 
-     ylab="Count",
-     xlim=c(1,7),
-     col="magenta",
-     freq=TRUE
-     )
-
-t.test(bilinguals$red.green, monolinguals$red.green, paired = FALSE)
-t.test(bilinguals$horrible.fantastic, monolinguals$horrible.fantastic, paired = FALSE)
-t.test(bilinguals$stupid.intellectual, monolinguals$stupid.intellectual, paired = FALSE)
-t.test(bilinguals$sparkling.still, monolinguals$sparkling.still, paired = FALSE)
-```
-
-There is no significant difference in how monolinguals and bilinguals rated
-their coffee and cake experience.
-
-## Difference in Totals
+## 
 
 If the hypothesis is correct that bilinguals have
 a broader concept of coffee and cake,
