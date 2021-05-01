@@ -1,67 +1,27 @@
 ---
-title: "Questionnaire Results"
+title: "Coffee, Cake and Culture"
 output: pdf_document
 ---
 > To have another language is to possess a second soul - Charlemagne
 
 # Hypothesis 
 
-People with a second language have a broader definitions
-because they are able to add definitions from another language.
+People with a second language have a broader concept of coffee and cake,
+because they combine their concepts from both languages.
 
-## Why choose coffee and cake?
+## Why Choose Coffee and Cake?
 
-It is a cross-cultural experience which has a flexible definition.
+It is a cross-cultural experience which has an imprecise definition.
+Thus it is open to interpretation by participants in the study.
 
-```{r setup, include=FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(fig.width=7, fig.height=4.5) 
 set.seed(1234) # for reproducibility 
+# Import the data
 questionnaire_data <- read.csv("questionnaire-data.csv", header = TRUE)
 questionnaire_data[,'gender']<-factor(questionnaire_data[,'gender'])
-```
-
-# Take a look the participants
-
-```{r ages}
-mean_age = mean(questionnaire_data$age, trim = 0, na.rm = FALSE)
-hist(questionnaire_data$age, 
-     main="Age Distribution", 
-     xlab="Age in Years", 
-     ylab="Count",
-     col="darkmagenta",
-     freq=TRUE
-     )
-```
-
-Average age is ``r round(mean_age, digits = 1)``.
-Largely middle aged sample.
-
-```{r gender}
-gender = table(questionnaire_data$gender)
-pie(gender, 
-    c("Female", "Male"),
-    main = "Gender Balance", 
-    col = rainbow(length(gender))
-    )
-```
-
-The sample was selected to be gender balanced.
-
-```{r languages}
-languages <- table(questionnaire_data$language)
-languages
-```
-
-Mostly North European languages with strong coffee and cake cultures
-
-# Are the two groups different?
-
-Sum up the multiple select
-so we know the total number of words each participant selected.
-Then split the data into those who speak a second language and those that do not.
-
-```{r split}
+# Sum up the yes/no selected words.
 questionnaire_data$total_selected = rowSums(questionnaire_data[,c(
     "Agreeable", "Creative","Determined", "Energetic","Funny", "Polite", "Kind",
     "Arrogant", "Cruel", "Grumpy", "Impatient", "Jealous","Rude", "Unhappy",
@@ -72,21 +32,213 @@ questionnaire_data$total_selected_negative = rowSums(questionnaire_data[,c(
     "Arrogant", "Cruel", "Grumpy", "Impatient", "Jealous","Rude", "Unhappy")])
 questionnaire_data$total_selected_neutral = rowSums(questionnaire_data[,c(
     "Bold", "Fierce", "Meticulous", "Restless", "Sly", "Talkative", "Unpredictable")])
+# Divide the participants between mono and bilinguals.
 monolinguals = questionnaire_data[questionnaire_data$bilingual == 0, ]
 bilinguals = questionnaire_data[questionnaire_data$bilingual != 0, ]
 ```
 
+## The Approach
+
+An experimenter supervised questionnaire was administered
+to ``r nrow(questionnaire_data)`` volunteer participants.
+The questionnaire was supervised to ensure 
+a reasonable completion rate
+and to ensure the participants understood the questions being asked.
+In in the event
+some of the questions were challenging for the participants to understand.
+If a similar questionnaire were to be administered without supervision
+it would need further refinement to allow the participants to complete
+it successfully.
+
+The questionnaire consisted of 3 parts.
+
+1. Rating Scales - participants were asked to rate 
+   their coffee and cake experience on 7 arbitrary scales.
+1. Word Assignment - participants were asked to indicate which words from a list
+   (7 positive, 7 negative and 7 neutral) 
+   could be applied to their coffee and cake experience.
+1. A Cloze Procedure - participants were asked to fill in the blanks
+   in a sentence from Tolstoy's 'Anna Karenina'.
+
+
+# The Participants
+
+The participants were all volunteers
+selected from the experimenter's friends and family.
+This is an undoubtedly biased sample, 
+but using an entirely randomly selected sample
+would have been too complicated and costly.
+
+## Age
+
+```{r}
+mean_age = mean(questionnaire_data$age, trim = 0, na.rm = FALSE)
+```
+
+Average age is ``r round(mean_age, digits = 1)``.
+So the sample is largely middle aged and post retirment.
+
+```{r}
+hist(questionnaire_data$age, 
+     main = "",
+     xlab="Age in Years", 
+     ylab="Count",
+     col="darkmagenta",
+     freq=TRUE
+     )
+```
+
+## Gender
+
+The sample was intended to be gender balanced,
+but ended up with more females.
+
+```{r}
+gender = table(questionnaire_data$gender)
+pie(gender, 
+    c("Female", "Male"),
+    main = "", 
+    col = rainbow(length(gender))
+    )
+```
+
+## Second Language
+
+A total of ``r nrow(questionnaire_data)`` participants took part in the study,
+``r nrow(monolinguals)`` of whom spoke only English
+and
+``r nrow(bilinguals)``of whom spoke English and one other language.
+
+Mostly North European languages with strong coffee and cake cultures.
+Half the participants were bilingual and half were monolingual.
+Unsurprisingly given that the study was conducted in England,
+the second languages spoken were all from Northern European nations.
+
+```{r}
+languages <- table(questionnaire_data$language)
+languages
+```
+
+# Do the two groups have different concepts of coffee and cake?
+
+The data were split the data into those who speak a second language
+and those that do not.
+
 ## Difference in Rating
 
-Or do bilinguals and monolinguals rate coffee and cake differently.
-Or do they hold difference concepts of coffee and cake.
-Using T test because the sample size is so small.
-This assumes that the two groups are normally distributed
-and the variances of the two groups are equal.
+Participants found rating their coffee and cake experience 
+on a set of arbitrary scales challenging.
+Some of the scales made no obvious sense to the participants
+so placing a numerical value against that scale 
+was equally non-sensical.
+It was necessary to encourage participants to attempt an 'intuitive'
+or 'gut feeling' response.
 
-```{r ratings}
+The hypothesis was that participants with a second language would
+have a broader concept of their coffee and cake experience.
+This would be expected to show up with the participants with a second language,
+providing more variable ratings for their coffee and cake experience.
+Whilst those with a single language might consistently
+rate their coffee and cake experience at one end of the scale.
+
+```{r}
+# Double histogram for comparing the rating scales
+library("colorspace") # for lighten and darken
+double.histogram <- function(monolingual.scale, bilingual.scale, colour="blue") 
+{
+    monolingual.breaks <- seq(min(monolingual.scale)-0.5, max(monolingual.scale)+0.5, by=1)
+    monolingual.colour <- lighten(colour, 0.4)
+    hist(monolingual.scale,
+         breaks=monolingual.breaks,
+         col=monolingual.colour,
+         freq=TRUE,
+         main="",
+         xlab="",
+         xlim=c(1,7),
+         ylim=c(1,5)
+         )
+    bilingual.breaks <- seq(min(bilingual.scale)-0.5, max(bilingual.scale)+0.5, by=1)
+    bilingual.colour <- darken(colour, 0.4)
+    hist(bilingual.scale,
+         breaks=bilingual.breaks,
+         col=bilingual.colour,
+         freq=TRUE,
+         main="",
+         xlab="",
+         xlim=c(1,7),
+         ylim=c(1,5)
+         )
+}
+```
+
+### Hot Cold
+
+```{r}
+double.histogram(monolinguals$cold.hot, bilinguals$cold.hot, "violet")
+```
+
+### Fat Thin
+
+```{r}
+double.histogram(monolinguals$fat.thin, bilinguals$fat.thin, "purple")
+```
+
+### Funny Sad
+
+```{r}
+double.histogram(monolinguals$funny.sad, bilinguals$funny.sad, "blue")
+```
+
+### Red Green
+
+```{r}
+double.histogram(monolinguals$red.green, bilinguals$red, "green")
+```
+
+### Horrible Fantastic
+
+```{r}
+double.histogram(monolinguals$horrible.fantastic, bilinguals$horrible.fantastic, "yellow")
+```
+
+### Stupid Intellectual
+
+```{r}
+double.histogram(monolinguals$stupid.intellectual, bilinguals$stupid.intellectual, "orange")
+```
+
+### Sparkling Still
+
+```{r}
+double.histogram(monolinguals$sparkling.still, bilinguals$sparkling, "red")
+```
+
+
+```{r}
+var.test(monolinguals$funny.sad, bilinguals$funny.sad, alternative = "two.sided")
 t.test(bilinguals$fat.thin, monolinguals$fat.thin, paired = FALSE)
+
+```
+
+```{r ratings-funny-sad}
+var.test(monolinguals$fat.thin, bilinguals$fat.thin, alternative = "two.sided")
 t.test(bilinguals$funny.sad, monolinguals$funny.sad, paired = FALSE)
+hist(monolinguals$funny.sad, 
+     main="Fat to Thin Rating", 
+     ylab="Count",
+     ylim=c(1,7),
+     xlim=c(1,7),
+     col="darkmagenta",
+     freq=TRUE
+     )
+hist(bilinguals$funny.sad, 
+     main="Fat to Thin Rating", 
+     ylab="Count",
+     xlim=c(1,7),
+     col="magenta",
+     freq=TRUE
+     )
+
 t.test(bilinguals$red.green, monolinguals$red.green, paired = FALSE)
 t.test(bilinguals$horrible.fantastic, monolinguals$horrible.fantastic, paired = FALSE)
 t.test(bilinguals$stupid.intellectual, monolinguals$stupid.intellectual, paired = FALSE)
