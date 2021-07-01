@@ -16,3 +16,10 @@ li {
   font-family: fantasy;
   font-size: large;
 }
+
+img{
+  margin:auto;
+  padding: 10px;
+  width: 20%;
+  
+}
