@@ -4,6 +4,8 @@ image:
 tasks:
   - name: Initialize pip
     init: |
+      echo 'eval "$(starship init bash)"' >> $HOME/.bashrc
+      echo 'export PIP_USER=false' >> $HOME/.bashrc
       pip install -r requirements.txt
       gp sync-done pip # 'pip' is an arbitrary tag.
   - name: API Web Server (5000)
