@@ -1,13 +1,26 @@
 image:
   file: .gitpod.Dockerfile
 
-# This is to get rid of the annoying popup feel free to leave this out
+tasks:
+  - name: Initialize pip
+    init: |
+      pip install -r requirements.txt
+      gp sync-done pip # 'pip' is an arbitrary tag.
+  - name: API Web Server (5000)
+    init: gp sync-await pip
+    command: |
+      export FLASK_APP=flask_app
+      export FLASK_ENV=development
+      flask run
+    openMode: tab-after
+
 ports:
-  - port: 8000
-    onOpen: ignore
+  - port: 5000
+    onOpen: open-preview
+    visibility: public
 
 vscode:
   extensions:
+    - ms-python.python
     - eamodio.gitlens
     - streetsidesoftware.code-spell-checker
-    - ms-python.python
