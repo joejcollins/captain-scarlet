@@ -15,6 +15,7 @@
         "dotenv",
         "endswith",
         "esxi",
+        "flasgger",
         "funcs",
         "getenv",
         "Googley",
