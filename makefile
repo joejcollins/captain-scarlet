@@ -1,9 +1,8 @@
 venv: .venv/touchfile
 
 .venv/touchfile: requirements.txt
-	export PIP_USER=false
+	export PIP_USER=no
 	test -d .venv || virtualenv .venv
-	
 	. .venv/bin/activate; pip install --upgrade pip setuptools
 	. .venv/bin/activate; pip install -Ur requirements.txt
 	# Script to start flask
