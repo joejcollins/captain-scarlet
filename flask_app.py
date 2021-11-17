@@ -1,12 +1,15 @@
 """ Flask App """
+import os
 import flask
 import flasgger
 import flasgger.utils as swag_utils
-import rest_api.flask_app_apidocs as apidocs
-import rest_api.text as text
+import flask_app_apidocs as apidocs
+from UnleashClient import UnleashClient
 
 api = flask.Flask(__name__)
-api.register_blueprint(text.text_api)
+
+UNLEASH_URL = os.environ.get('UNLEASH_URL')
+UNLEASH_API_TOKEN = os.environ.get('UNLEASH_API_TOKEN')
 
 swagger_template = {
     "swagger": "2.0",
@@ -28,4 +31,12 @@ def index():
         'message': "Hello there",
         'docs': '/apidocs/'
     }
+    feature = UnleashClient(
+        url=UNLEASH_URL,
+        app_name="default",
+        custom_headers={'Authorization': UNLEASH_API_TOKEN})
+    feature.initialize_client()
+    if feature.is_enabled("ops-test-toggle"):
+        greeting['message'] = "Hello toggle"
+    feature.destroy()
     return flask.jsonify(greeting)
