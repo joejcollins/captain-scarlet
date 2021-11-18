@@ -28,7 +28,7 @@ swagger = flasgger.Swagger(api, template=swagger_template)
 def index():
     """ Confirm that the flask app is running. """
     greeting = {
-        'message': "Hello there",
+        'message': "Hello there, no toggle.",
         'docs': '/apidocs/'
     }
     feature = UnleashClient(
@@ -37,6 +37,6 @@ def index():
         custom_headers={'Authorization': UNLEASH_API_TOKEN})
     feature.initialize_client()
     if feature.is_enabled("ops-test-toggle"):
-        greeting['message'] = "Hello toggle"
+        greeting['message'] = "Hello we be toggling."
     feature.destroy()
     return flask.jsonify(greeting)
