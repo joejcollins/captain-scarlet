@@ -1,8 +1,9 @@
+include $(PWD)/makefile.env
+
 venv: .venv/touchfile
 
 .venv/touchfile: requirements.txt
 	test -d .venv || virtualenv .venv
-	export PIP_USER=no
 	. .venv/bin/activate; pip install --upgrade pip setuptools
 	. .venv/bin/activate; pip install -Ur requirements.txt
 	# Script to start flask
