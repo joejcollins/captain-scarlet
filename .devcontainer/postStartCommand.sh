@@ -1,1 +1,0 @@
-sudo rstudio-server restart
