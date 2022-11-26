@@ -1,0 +1,2 @@
+FROM rocker/rstudio:latest
+CODESPACE_VSCODE_FOLDER
