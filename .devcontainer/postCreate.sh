@@ -1,4 +1,4 @@
 # Set the working directory
-$CODESPACE_VSCODE_FOLDER
+sudo rstudio-server stop
 sudo bash -c "echo 'setwd(\"$CODESPACE_VSCODE_FOLDER\")' > /home/rstudio/.Rprofile"
-sudo rstudio-server restart
+sudo rstudio-server start
