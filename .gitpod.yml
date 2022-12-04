@@ -10,7 +10,7 @@ tasks:
     sudo usermod --password $(openssl passwd -1 "shit") gitpod
     sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
     # sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
-    # udo rstudio-server restart
+    # sudo rstudio-server restart
 
 vscode:
   extensions:
