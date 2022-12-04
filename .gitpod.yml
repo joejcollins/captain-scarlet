@@ -1,6 +1,16 @@
+---
 image:
   file: .devcontainer/Dockerfile
+
 ports:
 - port: 8787
+
 tasks:
-- command: "sudo rstudio-server restart"
+- command: |
+    sudo usermod --password $(openssl passwd -1 "shit") gitpod
+    sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
+    sudo rstudio-server restart
+
+vscode:
+  extensions:
+    - Ikuyadeu.r
