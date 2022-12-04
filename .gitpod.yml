@@ -1,0 +1,6 @@
+image:
+  file: .devcontainer/Dockerfile
+ports:
+- port: 8787
+tasks:
+- command: "sudo rstudio-server restart"
