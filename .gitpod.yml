@@ -14,9 +14,10 @@ tasks:
     sudo usermod -a -G sudo gitpod
     sudo bash -c "echo 'server-user=gitpod' >> /etc/rstudio/rserver.conf"
     sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
-    # set USER=gitpod
-    # rserver --server-daemonize 0 --server-user=gitpod
-    # sudo rstudio-server restart
+    # Start and restart the rserver so the .Rprofile is read
+    sudo rserver
+    sudo pkill rserver
+    rserver
 
 vscode:
   extensions:
