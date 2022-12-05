@@ -9,6 +9,7 @@ tasks:
 - init: |
     sudo bash -c "echo R_LIBS_USER=$GITPOD_REPO_ROOT/../.R/library > /home/gitpod/.Renviron"
     sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
+    ln -s /workspace/captain-scarlet captain-scarlet
     # https://stackoverflow.com/questions/47541007/how-to-i-bypass-the-login-page-on-rstudio
     sudo usermod -a -G sudo gitpod
     sudo bash -c "echo 'server-user=gitpod' >> /etc/rstudio/rserver.conf"
