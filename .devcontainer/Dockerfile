@@ -1,2 +1,2 @@
-# FROM rocker/rstudio:latest
-FROM rstudio/r-session-complete:jammy
+FROM rocker/rstudio:latest
+# FROM rstudio/r-session-complete:jammy
