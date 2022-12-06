@@ -11,7 +11,7 @@ RUN sudo apt -q update \
  && sudo rm rstudio-server-2022.07.2-576-amd64.deb
 
 # Allow the vscode user to run Rstudio Server
-RUN sudo usermod -a -G root vscode \
- && sudo touch /etc/rstudio/rserver.conf \
- && sudo bash -c "echo 'server-user=vscode' >> /etc/rstudio/rserver.conf" \
- && sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
+# RUN sudo usermod -a -G root vscode \
+#  && sudo touch /etc/rstudio/rserver.conf \
+#  && sudo bash -c "echo 'server-user=vscode' >> /etc/rstudio/rserver.conf" \
+#  && sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
