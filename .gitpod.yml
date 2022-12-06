@@ -15,10 +15,9 @@ tasks:
     sudo bash -c "echo 'server-user=gitpod' >> /etc/rstudio/rserver.conf"
     sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
     # Start the rserver with sudo otherwise it won't run for the gitpod user
-    sudo rserver
-    sudo pkill rserver
+    sudo rstudio-server restart
 - command: |
-    rserver
+    uname -a > ../post-create-log.txt
 
 vscode:
   extensions:
