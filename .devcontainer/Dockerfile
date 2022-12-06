@@ -8,7 +8,10 @@ RUN sudo apt -q update \
  && sudo apt install --assume-yes r-base gdebi-core \
  && wget wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2022.07.2-576-amd64.deb \
  && sudo gdebi -n rstudio-server-2022.07.2-576-amd64.deb \
- && sudo rm rstudio-server-2022.07.2-576-amd64.deb \
- && sudo usermod -a -G sudo vscode \
+ && sudo rm rstudio-server-2022.07.2-576-amd64.deb
+
+# Allow the vscode user to run Rstudio Server
+RUN sudo usermod -a -G root vscode \
+ && sudo touch /etc/rstudio/rserver.conf \
  && sudo bash -c "echo 'server-user=vscode' >> /etc/rstudio/rserver.conf" \
  && sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
