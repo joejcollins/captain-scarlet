@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM mcr.microsoft.com/devcontainers/base:focal
 
 # Install Rstudio Server
 RUN sudo apt -q update \
