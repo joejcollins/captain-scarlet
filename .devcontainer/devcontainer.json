@@ -1,8 +1,10 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "Ubuntu",
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"name": "rstudio",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
