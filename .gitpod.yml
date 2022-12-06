@@ -8,14 +8,15 @@ ports:
 tasks:
 - init: |
     sudo bash -c "echo R_LIBS_USER=$GITPOD_REPO_ROOT/../.R/library > /home/gitpod/.Renviron"
-    sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
-    ln -s /workspace/captain-scarlet captain-scarlet
+    # sudo bash -c "echo 'setwd(\"$GITPOD_REPO_ROOT\")' > /home/gitpod/.Rprofile"
+    ln -s /workspace/captain-scarlet /home/gitpod/captain-scarlet
     # https://stackoverflow.com/questions/47541007/how-to-i-bypass-the-login-page-on-rstudio
     sudo usermod -a -G sudo gitpod
     sudo bash -c "echo 'server-user=gitpod' >> /etc/rstudio/rserver.conf"
     sudo bash -c "echo 'auth-none=1' >> /etc/rstudio/rserver.conf"
     # Start the rserver with sudo otherwise it won't run for the gitpod user
-    sudo rstudio-server restart
+    sudo rserver
+    sudo pkill rserver
 - command: |
     uname -a > ../post-create-log.txt
 
