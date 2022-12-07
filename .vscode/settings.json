@@ -1,0 +1,27 @@
+{
+    "editor.rulers": [
+      88
+    ],
+    "editor.minimap.enabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+      "."
+    ],
+    "files.exclude": {
+      "**/*.pyc": {
+        "when": "$(basename).py"
+      },
+      "**/__pycache__": true,
+      "**/.pytest_cache": true
+    },
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+      "--max-line-length=88"
+    ],
+    "python.linting.mypyEnabled": true,
+    "workbench.colorTheme": "Visual Studio Light",
+    "python.defaultInterpreterPath": ".venv/bin/python"
+  }
