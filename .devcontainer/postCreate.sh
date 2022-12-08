@@ -1,5 +1,7 @@
 # Set the working directory
-sudo bash -c "echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron"
+echo shit
+touch /home/rstudio/.Renviron
+echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
 ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
 # # https://stackoverflow.com/questions/47541007/how-to-i-bypass-the-login-page-on-rstudio
 # sudo usermod -a -G root rstudio
@@ -9,8 +11,8 @@ ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
 # sudo rserver
 # sudo pkill rserver
 # Setup the Python environment
-python3 -m venv .venv
-. .venv/bin/activate
-pip install --upgrade pip setuptools
-pip install -Ur requirements.txt
-alias python='python3'
+# python3 -m venv .venv
+# . .venv/bin/activate
+# pip install --upgrade pip setuptools
+# pip install -Ur requirements.txt
+# alias python='python3'
