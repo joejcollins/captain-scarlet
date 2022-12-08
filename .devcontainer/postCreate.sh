@@ -1,8 +1,8 @@
 # Set the working directory
 echo shit
-touch /home/rstudio/.Renviron
-echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
-ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
+# touch /home/rstudio/.Renviron
+# echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
+# ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
 # # https://stackoverflow.com/questions/47541007/how-to-i-bypass-the-login-page-on-rstudio
 # sudo usermod -a -G root rstudio
 # sudo bash -c "echo 'server-user=rstudio' >> /etc/rstudio/rserver.conf"
