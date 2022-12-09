@@ -1,6 +1,5 @@
 # Set the working directory
 echo Renviron config
-whoami
 touch /home/rstudio/.Renviron
 echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
 ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
