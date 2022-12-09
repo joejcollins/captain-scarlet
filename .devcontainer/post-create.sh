@@ -1,7 +1,8 @@
 # Set the working directory
 echo Renviron config
+whoami
 touch /home/rstudio/.Renviron
-sudo bash -c "echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron"
+echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
 ln -s /workspace/captain-scarlet /home/rstudio/captain-scarlet
 # https://stackoverflow.com/questions/47541007/how-to-i-bypass-the-login-page-on-rstudio
 echo Rstudio login
