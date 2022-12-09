@@ -1,7 +1,7 @@
 # Set the working directory
 echo Renviron config
 touch /home/rstudio/.Renviron
-echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron
+sudo bash -c "echo R_LIBS_USER=$CODESPACE_VSCODE_FOLDER/../.R/library > /home/rstudio/.Renviron"
 ln -s /workspaces/captain-scarlet /home/rstudio/captain-scarlet
 # Restart the rserver with sudo otherwise it won't run for the local user (dunno why)
 echo Rserver setup
