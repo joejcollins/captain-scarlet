@@ -12,13 +12,13 @@
 		  "installRadian": "true",
 		  "installVscDebugger": "true"
 		}
-	}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R --version",
+	"postCreateCommand": ". ./.devcontainer/post-create.sh  > ../post-create-log.txt"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
