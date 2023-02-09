@@ -14,6 +14,10 @@ dataset_Name <- 'Shropshire Ecological Data Network Database'
 data_r6 <- read.csv(file="flora_2022.csv", 
                       stringsAsFactors = FALSE)
 
+data_files <- dir("./data/raw", full.names = TRUE)
+
+data_6 <- do.call(rbind,lapply(data_files,read.csv))
+
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
