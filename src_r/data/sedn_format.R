@@ -1,4 +1,4 @@
-setwd("~/Documents/NBN/Data/updates/SEDN")
+# setwd("~/Documents/NBN/Data/updates/SEDN")
 
 library(stringi)
 library(stringr)
@@ -12,8 +12,10 @@ id_verification <- 'Accepted - considered correct'
 dataset_Name <- 'Shropshire Ecological Data Network Database'
 
 data_r6 <- read.csv(file="data/raw/flora_2022_split_1.csv", 
-                      stringsAsFactors = FALSE)
+                    stringsAsFactors = FALSE)
 
+# Rename the column name - y to Year
+colnames(data_r6)[colnames(data_r6) == "Y"] ="year"
 
 trim <- function (x) gsub("^\\s+|\\s+$", "", x)
 
@@ -361,9 +363,9 @@ data_dwc$taxonID[data_dwc$taxonID=="N/A"] <- NA
 
 data_dwc$occurrenceID <- paste0("urn:catalog:SEDN:",rownames(data_dwc))
 
-source(file="~/Documents/NBN/Data/R/nbn_recorder6_to_darwin_core_regex_functions.R")
-data_dwc$locality <- string_make_utfeight(data_dwc$locality)
-data_dwc$recordedBy <- string_make_utfeight(data_dwc$recordedBy)
+# source(file="~/Documents/NBN/Data/R/nbn_recorder6_to_darwin_core_regex_functions.R")
+# data_dwc$locality <- string_make_utfeight(data_dwc$locality)
+# data_dwc$recordedBy <- string_make_utfeight(data_dwc$recordedBy)
 
 
 
