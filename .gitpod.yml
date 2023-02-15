@@ -7,6 +7,9 @@ ports:
 
 tasks:
 - name: R setup
+  init: |
+    mkdir -p ../.R/library
+    sudo Rscript setup.r
   command: |
     sudo bash -c "echo R_LIBS_USER=$GITPOD_REPO_ROOT/../.R/library > /home/gitpod/.Renviron"
     ln -s /workspace/captain-scarlet /home/gitpod/captain-scarlet
@@ -25,8 +28,8 @@ tasks:
     pip install -Ur requirements.txt
   command: |
     alias python='python3'
-    
 
 vscode:
   extensions:
+    - ms-python.python
     - reditorsupport.r

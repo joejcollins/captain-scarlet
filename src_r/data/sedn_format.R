@@ -11,7 +11,7 @@ id_verification <- 'Accepted - considered correct'
 
 dataset_Name <- 'Shropshire Ecological Data Network Database'
 
-data_r6 <- read.csv(file="data/raw/flora_2022_split_1.csv", 
+data_r6 <- read.csv(file="data/raw/flora_2023_split_1.csv", 
                     stringsAsFactors = FALSE)
 
 # Rename the column name - y to Year
