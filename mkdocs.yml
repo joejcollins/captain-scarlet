@@ -2,7 +2,7 @@
 site_name: Captain Scarlet
 repo_url: https://github.com/joejcollins/captain-scarlet
 theme:
-    name: 'material'
+    name: 'readthedocs'
     palette:
         - scheme: default
           primary: indigo
@@ -10,7 +10,6 @@ theme:
 
 plugins:
     - search
-    - roamlinks
     - mermaid2
 
 extra_javascript:
