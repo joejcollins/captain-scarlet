@@ -7,4 +7,3 @@ if is_on:
     print("👍")
 else:
     print("👎")
- 

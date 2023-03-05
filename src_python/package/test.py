@@ -24,10 +24,11 @@ MY_CALENDAR = calendar.Calendar(0)  # Start of week is 0
 
 
 class Week:  # pylint: disable=too-few-public-methods
-    """ A week object
+    """A week object
 
     Should return the days for any given week between 1 and 52.
-     """
+    """
+
     week_number = 1
     year = 2023
 
@@ -39,10 +40,10 @@ class Week:  # pylint: disable=too-few-public-methods
         self.year_date_end = datetime.date(year, 12, 31)
 
     def dates(self):
-        """ Return an array of the dates for the week of interest
+        """Return an array of the dates for the week of interest
 
         So this should provide 7 days starting on Monday.  Unless
-        it is the beginning or end of the year in which case it 
+        it is the beginning or end of the year in which case it
         might be fewer days.
         """
         first_day_of_week = self._get_first_day_of_week(self.week_number, self.year)
@@ -57,7 +58,7 @@ class Week:  # pylint: disable=too-few-public-methods
         return dates
 
     def _get_first_day_of_week(self, week_number, year):
-        """ Get the first Monday of the week for the week number given 
+        """Get the first Monday of the week for the week number given
 
         By incrementing through the weeks until you get to the one you
         are interested in.
@@ -68,11 +69,13 @@ class Week:  # pylint: disable=too-few-public-methods
         if week_number > 1:  # get the second week of the year
             first_day_of_week = self._increment_to_next_monday(first_day_of_week)
         if week_number > 2:  # increment to the first Monday (in weeks)
-            first_day_of_week = first_day_of_week + datetime.timedelta(weeks=week_number - 2)
+            first_day_of_week = first_day_of_week + datetime.timedelta(
+                weeks=week_number - 2
+            )
         return first_day_of_week
 
     def _increment_to_next_monday(self, date):
-        """ Increment the date until you get to the next Monday
+        """Increment the date until you get to the next Monday
 
         Used for counting through the weeks in the year, until
         you get to the week you are interested in.
@@ -85,21 +88,21 @@ class Week:  # pylint: disable=too-few-public-methods
 
 
 class TestWeek(unittest.TestCase):
-    """ Tests for the week
+    """Tests for the week
 
     VSCode doesn't show the output in a hover window the way it does for
-    pytest, so to see the errors use 
-    `python -m unittest discover -s Log -p "*_test.py"` or use debug. """
+    pytest, so to see the errors use
+    `python -m unittest discover -s Log -p "*_test.py"` or use debug."""
 
     def test_class_is_present(self):
-        """ Confirm that the class is present """
+        """Confirm that the class is present"""
         try:
             Week(1, 2020)
         except NameError:
             self.fail("Class not present")
 
     def test_method_is_present(self):
-        """ Confirm that the method is present """
+        """Confirm that the method is present"""
         test_week = Week(1, 2020)
         try:
             test_week.dates()
@@ -107,12 +110,14 @@ class TestWeek(unittest.TestCase):
             self.fail("Method not present")
 
     def test_increment_to_next_monday(self):
-        """ Confirm the first Monday for 3 different weeks in 2020 """
+        """Confirm the first Monday for 3 different weeks in 2020"""
         test_week = Week(1, 2020)
         # First day of the year is Wednesday 1 January, should increment to Monday 6 January
         first_day_of_year = datetime.date(2020, 1, 1)
         first_monday_of_year = datetime.date(2020, 1, 6)
-        self.assertEqual(test_week._increment_to_next_monday(first_day_of_year), first_monday_of_year)
+        self.assertEqual(
+            test_week._increment_to_next_monday(first_day_of_year), first_monday_of_year
+        )
         # One Monday should increment to the next Monday
         one_monday = datetime.date(2020, 2, 17)
         next_monday = datetime.date(2020, 2, 24)
@@ -120,11 +125,14 @@ class TestWeek(unittest.TestCase):
         # Last Monday of the year should increment into next year
         last_monday_of_year = datetime.date(2020, 12, 28)
         next_monday_of_next_year = datetime.date(2021, 1, 4)
-        self.assertEqual(test_week._increment_to_next_monday(last_monday_of_year), next_monday_of_next_year)
+        self.assertEqual(
+            test_week._increment_to_next_monday(last_monday_of_year),
+            next_monday_of_next_year,
+        )
 
     def test_get_first_day_of_week(self):
-        """ Make sure the first day of the week should be a Monday unless 
-        it is the first week of the year 
+        """Make sure the first day of the week should be a Monday unless
+        it is the first week of the year
 
         * 2020 started on a Wednesday
         * 2020 my birthday was on a Monday
@@ -146,12 +154,12 @@ class TestWeek(unittest.TestCase):
         self.assertEqual(week_day, calendar.MONDAY)
 
     def test_days_in_first_week(self):
-        """ Confirm first week has 5 days and starts on Wednesday """
+        """Confirm first week has 5 days and starts on Wednesday"""
         test_week = Week(1, 2020)
         self.assertEqual(len(test_week.dates()), 5)
 
     def test_the_fourth_week(self):
-        """ Confirm that the fourth week of 2020 starts on 20 Jan """
+        """Confirm that the fourth week of 2020 starts on 20 Jan"""
         test_week = Week(4, 2020)
         first_day_of_the_week = test_week.dates()[0]
         self.assertEqual(first_day_of_the_week.day, 20)

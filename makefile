@@ -10,14 +10,14 @@ compile:
 	python -m pip install pip-tools
 	python -m piptools compile --extra=test --extra=dev -o requirements.txt pyproject.toml && echo "-e ." >> requirements.txt
 
-.PHONY:= docs  # because there is a directory called docs.
+.PHONY: docs  # because there is a directory called docs.
 docs:
 	. .venv/bin/activate
-	python python -m mkdocs build --clean
+	python -m mkdocs build --clean
 
 format:
 	. .venv/bin/activate
-	python python -m black --config pyproject.toml .
+	python -m black --config pyproject.toml .
 
 mypy:
 	. .venv/bin/activate
@@ -36,4 +36,4 @@ requirements:
 
 test:
 	. .venv/bin/activate
-	python python -m pytest ./tests_unit
+	python -m pytest ./src_python/pytest_unit
