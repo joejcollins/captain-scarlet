@@ -7,97 +7,13 @@ name = "captain_scarlet"
 version = "0.0.1"
 description = "Data and dates"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 dependencies = [
-        "amqp",
-        "ansi2html",
-        "ansible-lint",
-        "ansible==5.9.0",  # Newer versions of Ansible break Kubespray at the current version.
-        "arrow",
-        "beautifulsoup4",
-        "black",
-        "boto3",
-        "botocore",
-        "celery",
-        "celery-types",  # used for type checking.
-        "click-completion",
-        "click",
-        "configparser",
-        "cron-descriptor",
-        "crontab",
-        "debugpy",  # only required for debugging, not needed for production.
-        "dnspython3",
-        "fastapi",
-        "flake8",
-        "flasgger",
-        "Flask-Cors",
-        "Flask",  # used by the PAP API.
-        "flower",
-        "fuzzywuzzy",
-        "gunicorn",
-        "hiredis",
-        "humanfriendly",
-        "humanize",
-        "hypercorn",
-        "httpx",  # used for FastAPI testing.
-        "ipaddress",
-        "Jinja2",
-        "junos-eznc",  # needed for the Junos deploys.
-        "jmespath",
-        "jxmlease",  # needed by the role back to paramiko 2.8.1 which is need for the Junos deploys.
-        "keyring",
-        "levenshtein",  # needed by the role back to paramiko 2.8.1 which is need for the Junos deploys.
         "lxml",
         "mkdocs",
         "mkdocs-mermaid2-plugin",
-        "mkdocs-roamlinks-plugin",
-        "molecule",
-        "mypy",  # used for type checking, not needed for production.
-        "ncclient",
-        "netaddr",
-        "openshift",  # used by Kubespray.
-        "packaging",  # provides a consistent means for parsing version numbers.
-        "paramiko==2.8.1",  # the Juniper switches currently do not support later versions of paramiko.
-        "pathlib2",
-        "pip-tools",  # used to manage requirements.txt.
-        "prometheus-fastapi-instrumentator",
-        "py-zabbix",
-        "pydantic",  # intended to replace the schematics models.
-        "pyopenssl==22.1.0",  # needed by the nginx_exporter.
-        "pytest-asyncio",  # used for testing, not needed for production.
-        "pytest-flask",  # used for testing, not needed for production.
-        "pytest",  # used for testing, not needed for production.
-        "pytest-mock",  # used for testing, not needed for production.
-        "pytest-testinfra",  # used for testing, not needed for production.
-        "python-dateutil",
-        "python-dotenv",  # used for the .env secrets file.
-        "python-Levenshtein",
-        "pyvmomi",
-        "pywinrm",
-        "PyYAML",
-        "redis",
-        "requests-oauthlib",
-        "requests",
-        "schematics",
-        "six",
-        "termcolor",
-        "text-unidecode",
-        "toml",
-        "tqdm",
-        "types-beautifulsoup4",  # used for type checking.
-        "types-paramiko",  # used for type checking.
-        "types-pyvmomi",  # used for type checking.
-        "types-python-dateutil",  # used for type checking.
-        "types-PyYAML",  # used for type checking.
-        "types-singledispatch",  # used for type checking.
-        "types-six",  # used for type checking.
-        "types-redis",  # used for type checking.
-        "types-requests",  # used for type checking.
-        "UnleashClient",  # used by the for feature flags.
-        "urllib3",
-        "zabbix-api",
+        "mkdocs-roamlinks-plugin"
 ]
-
 
 [project.optional-dependencies]
 test = [
@@ -117,24 +33,19 @@ py-modules = [
 ]  #  Disable auto discovery of modules (and only include the ones we specifically want).
 
 [tool.black]
-line-length = 110
-target-version = ['py39']
+line-length = 88
+target-version = ['py310']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
     \.eggs
     |\.git
-    |^/pod/roles/elasticsearch
-    |^/ansible_zengenti/mitogen-0.3.2
-    |^/pod/collections
-    |^/pod/kubespray
-    |^/ansible_zengenti/modules/dellemc-openmanage-ansible-modules-devel
 )/
 '''
 
 [tool.isort]
 profile = "black"
-line_length = 110
+line_length = 88
 
 [tool.pyright]
 exclude = ["**/node_modules",
@@ -142,27 +53,21 @@ exclude = ["**/node_modules",
 ]
 reportMissingImports = true
 reportMissingTypeStubs = true
-pythonVersion = "3.9"
+pythonVersion = "3.10"
 pythonPlatform = "Linux"
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 follow_imports = "skip"
 
 [[tool.mypy.overrides]]
-module = [
-    "schematics.*",
-    "dns.*",
-    "flasgger.*",
-    "flask_cors.*"
-]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-q --disable-warnings --cache-clear"
 testpaths = [
-    "tests_unit"
+    "./src_python/pytest_unit"
 ]

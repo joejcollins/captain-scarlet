@@ -7,8 +7,8 @@ clean:
 
 compile:
 	. .venv/bin/activate
-	python python -m pip install pip-tools
-	python -m piptools compile -o requirements.txt setup.py && echo "-e ." >> requirements.txt
+	python -m pip install pip-tools
+	python -m piptools compile --extra=test --extra=dev -o requirements.txt pyproject.toml && echo "-e ." >> requirements.txt
 
 .PHONY:= docs  # because there is a directory called docs.
 docs:
