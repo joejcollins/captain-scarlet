@@ -25,11 +25,17 @@ tasks:
     python3 -m venv .venv
     . .venv/bin/activate
     pip install --upgrade pip setuptools
-    pip install -Ur requirements.txt
+    pip install -r requirements.txt
   command: |
     alias python='python3'
 
 vscode:
   extensions:
+    - bungcip.better-toml
+    - eamodio.gitlens
+    - github.copilot
     - ms-python.python
+    - ms-python.isort
     - reditorsupport.r
+    - streetsidesoftware.code-spell-checker
+    - sourcery.sourcery

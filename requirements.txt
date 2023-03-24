@@ -140,6 +140,8 @@ requests==2.28.2
     # via
     #   mkdocs-material
     #   mkdocs-mermaid2-plugin
+ruff==0.0.259
+    # via captain-scarlet (pyproject.toml)
 six==1.16.0
     # via
     #   asttokens

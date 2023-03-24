@@ -1,4 +1,5 @@
-# Demo of a package
+"""Demo of a package"""
+
 
 def shit():
     """Return a string."""
