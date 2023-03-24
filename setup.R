@@ -1,0 +1,25 @@
+# R package list
+.libPaths("../.R/library")
+install.packages(c(
+    "base64enc",
+    "digest",
+    "evaluate",
+    "glue",
+    "here",
+    "highr",
+    "htmltools",
+    "jsonlite",
+    "knitr",
+    "languageserver",
+    "Rcpp",
+    "readr",
+    "magrittr",
+    "markdown",
+    "mime",
+    "rlang",
+    "rmarkdown",
+    "stringi",
+    "stringr",
+    "testthat",
+    "tinytex",
+    "xfun"), lib = "../.R/library")

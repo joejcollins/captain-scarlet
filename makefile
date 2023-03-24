@@ -29,11 +29,14 @@ mypy:  # Type check the code with mypy.
 report:  # Report the python version and pip list.
 	. .venv/bin/activate; python3 --version
 	. .venv/bin/activate; python3 -m pip list -v
+	R --version
 
-requirements:  # Install the requirements for Python.
+requirements:  # Install the requirements for Python and R.
 	python3 -m venv .venv
 	. .venv/bin/activate; python -m pip install --upgrade pip setuptools
 	. .venv/bin/activate; python -m pip install -r requirements.txt
+	sudo Rscript "setup.R"
 
 test:  # Run the tests.
 	. .venv/bin/activate; python -m pytest ./src_python/pytest_unit
+	Rscript -e "testthat::test_dir('src_r/tests')"
