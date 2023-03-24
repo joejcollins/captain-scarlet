@@ -9,6 +9,10 @@ compile:  # Compile the requirements files using pip-tools.
 	. .venv/bin/activate; python -m pip install pip-tools
 	. .venv/bin/activate; python -m piptools compile --extra=test --extra=dev -o requirements.txt pyproject.toml && echo "-e ." >> requirements.txt
 
+.PHONY: data  # because there is a directory called data.
+data:  # Generate the processed data.
+	sudo Rscript "./src_r/sedn2brc.R"
+
 .PHONY: docs  # because there is a directory called docs.
 docs:
 	. .venv/bin/activate; python -m mkdocs build --clean

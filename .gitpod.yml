@@ -36,6 +36,7 @@ vscode:
     - github.copilot
     - ms-python.python
     - ms-python.isort
+    - RDebugger.r-debugger
     - reditorsupport.r
     - streetsidesoftware.code-spell-checker
     - sourcery.sourcery

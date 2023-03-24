@@ -13,7 +13,8 @@ dependencies = [
         "lxml",
         "mkdocs",
         "mkdocs-mermaid2-plugin",
-        "mkdocs-roamlinks-plugin"
+        "mkdocs-roamlinks-plugin",
+        "radian"
 ]
 
 [project.optional-dependencies]
