@@ -8,8 +8,8 @@ output: html_document
 library(ggplot2)
 library(dplyr)
 
-smaller <- diamonds %>% 
-  filter(carat <= 2.5)
+curve(x^2 + 5)
+curve(sin(x), from = 0, to = 2*pi, col = "red", lwd = 2)
 ```
 
 We have data about `r nrow(diamonds)` diamonds. Only 
@@ -18,7 +18,7 @@ We have data about `r nrow(diamonds)` diamonds. Only
 below:
 
 ```{r, echo = FALSE}
-smaller %>% 
-  ggplot(aes(carat)) + 
+smaller %>%
+  ggplot(aes(carat)) +
   geom_freqpoly(binwidth = 0.01)
 ```
