@@ -13,6 +13,7 @@ install.packages(c(
     "knitr",
     "languageserver",
     "lintr",
+    "lubridate",
     "Rcpp",
     "readr",
     "magrittr",

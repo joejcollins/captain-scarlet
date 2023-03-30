@@ -1,3 +1,5 @@
+library(lubridate)
+
 # Merge the split data files.
 merge_csv_files <- function(data_path) {
   all_files <- list.files(data_path, pattern = "*1.csv", full.names = TRUE)
@@ -65,12 +67,33 @@ transform_columns <- function(df) {
   return(df)
 }
 
+convert_to_range <- function(date_str) {
+  # determine the type of date
+  date_type <- date_type(date_str)
+  
+  # parse date string and create date range
+  if (date_type == "year") {
+    start_date <- parse_date_time(date_str, orders = c("Y"))
+    end_date <- start_date %m+% years(1) - seconds(1)
+  } else if (date_type == "month") {
+    start_date <- parse_date_time(paste0(date_str, "-01"), orders = c("Y-m-d"))
+    end_date <- start_date %m+% months(1) - seconds(1)
+  } else {
+    start_date <- parse_date_time(date_str, orders = c("dmy", "mdY", "Ymd"))
+    end_date <- start_date %m+% days(1) - seconds(1)
+  }
+  
+  # format date range as ISO 8601 string
+  paste0(format(start_date, "%Y-%m-%dT%H:%M:%S"), "/", format(end_date, "%Y-%m-%dT%H:%M:%S"))
+}
+
 ###############################################################################
 # Main script
 sedn_df <- merge_csv_files("./data/raw")
 sedn_df <- transform_columns(sedn_df)
 sedn_df <- rename_columns(sedn_df)
 sedn_df <- remove_columns(sedn_df)
+sedn_df$date_range <- apply(sedn_df["Date"], 2, sqrt)
 
 
 # Save the transformed data frame.
