@@ -7,8 +7,8 @@ merge_csv_files <- function(data_path) {
     df <- read.csv(filename)
     data_frames <- append(data_frames, list(df))
   }
-  merged_df <- do.call(rbind, data_frames)
-  return(merged_df)
+  sedn_df <- do.call(rbind, data_frames)
+  return(sedn_df)
 }
 
 
@@ -40,9 +40,9 @@ remove_columns <- function(df_with_all_columns) {
 
 ###############################################################################
 # Main script
-merged_df <- merge_csv_files("./data/raw")
-merged_df <- rename_columns(merged_df)
-merged_df <- remove_columns(merged_df)
+sedn_df <- merge_csv_files("./data/raw")
+sedn_df <- rename_columns(sedn_df)
+sedn_df <- remove_columns(sedn_df)
 
 # Save the transformed data frame.
-write.csv(merged_df, file = "./data/processed/VC40.csv", row.names = FALSE)
+write.csv(sedn_df, file = "./data/processed/VC40.csv", row.names = FALSE)
