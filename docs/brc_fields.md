@@ -1,15 +1,15 @@
 
 |    |BRC dataset              |   |
 |----|-------------------------|---|
-| 1. |"ID"                     |   |
-| 2. |"RecordKey"              |   |
-| 3. |"External key"           |   |
-| 4. |"Source"                 |   |
-| 5. |"Rank"                   |   |
-| 6. |"Taxon"                  |   |
-| 7. |"Common name"            |   |
-| 8. |"Taxon group"            |   |
-| 9. |"Kingdom"                |   |
+| 1. | "ID"                    |   |
+| 2. | "RecordKey"             |   |
+| 3. | "External key"          |   |
+| 4. | "Source"                |   |
+| 5. | "Rank"                  |   |
+| 6. | "Taxon"                 |   |
+| 7. | "Common name"           |   |
+| 8. | "Taxon group"           |   |
+| 9. | "Kingdom"               |   |
 | 10 | "Order"                 |   |
 | 11 | "Family"                |   |
 | 12 | "TaxonVersionKey"       |   |

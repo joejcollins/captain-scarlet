@@ -1,38 +1,39 @@
 
-
-"X"
-"Species"
-"Original.name"
-"Sort.order"
-"TVK"
-"Display.name"
-"Common.Name"
-"Status"       
-"EA"
-"L"
-"F"
-"R"
-"N"
-"S"
-"Site"
-"Site.Status"  
-"Owner"
-"GR"
-"Monad"
-"Tetrad"
-"Hectad"
-"DC"
-"Y"
-"Date"         
-"Recorder"
-"Determiner"
-"Herbarium"
-"Quadrat"
-"Abundance"
-"Habitat"
-"Altitude"
-"Sex.stage"    
-"Record.type"
-"Substrate"
-"Comment"
-"Reference"  
+|     |SEDN dataset             |   |
+|-----|-------------------------|---|
+| 1.  |"X"                      |   |         
+| 2.  |"Species"                |   |         
+| 3.  |"Original.name"          |   |               
+| 4.  |"Sort.order"             |   |            
+| 5.  |"TVK"                    |   |  
+| 6.  |"Display.name"           |   |              
+| 7.  |"Common.Name"            |   |             
+| 8.  |"Status"                 |   |               
+| 9.  |"EA"                     |   |                
+| 10. |"L"                      |   |               
+| 11. |"F"                      |   |               
+| 12. |"R"                      |   |               
+| 13. |"N"                      |   |               
+| 14. |"S"                      |   |               
+| 15. |"Site"                   |   |  
+| 16. |"Site.Status"            |   |               
+| 17. |"Owner"                  |   |  
+| 18. |"GR"                     |   |  
+| 19. |"Monad"                  |   |  
+| 20. |"Tetrad"                 |   |        
+| 21. |"Hectad"                 |   |        
+| 22. |"DC"                     |   |  
+| 23. |"Y"                      |   |  
+| 24. |"Date"                   |   |               
+| 25. |"Recorder"               |   |          
+| 26. |"Determiner"             |   |            
+| 27. |"Herbarium"              |   |           
+| 28. |"Quadrat"                |   |         
+| 29. |"Abundance"              |   |           
+| 30. |"Habitat"                |   |         
+| 31. |"Altitude"               |   |          
+| 32. |"Sex.stage"              |   |               
+| 33. |"Record.type"            |   |             
+| 34. |"Substrate"              |   |           
+| 35. |"Comment"                |   |         
+| 36. |"Reference"              |   |             
