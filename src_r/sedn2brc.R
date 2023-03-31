@@ -67,12 +67,28 @@ transform_columns <- function(df) {
   return(df)
 }
 
+# Determine the date precision
+date_precision <- function(date_str) {
+  # parse date string
+  date <- parse_date_time(date_str, orders = c("dmy", "mdY", "Ymd", "Ym", "Y"))
+  
+  # determine the type of date
+  if (is.na(date$day) & is.na(date$month)) {
+    "year"
+  } else if (is.na(date$day)) {
+    "month"
+  } else {
+    "day"
+  }
+}
+
+# Determine the range that the date covers
 convert_to_range <- function(date_str) {
   # determine the type of date
-  date_type <- date_type(date_str)
+  date_precision <- date_precision(date_str)
   
   # parse date string and create date range
-  if (date_type == "year") {
+  if (date_precision == "year") {
     start_date <- parse_date_time(date_str, orders = c("Y"))
     end_date <- start_date %m+% years(1) - seconds(1)
   } else if (date_type == "month") {
@@ -93,7 +109,7 @@ sedn_df <- merge_csv_files("./data/raw")
 sedn_df <- transform_columns(sedn_df)
 sedn_df <- rename_columns(sedn_df)
 sedn_df <- remove_columns(sedn_df)
-sedn_df$date_range <- apply(sedn_df["Date"], 2, sqrt)
+sedn_df$date_range <- apply(sedn_df["Date"], 2, convert_to_range)
 
 
 # Save the transformed data frame.
