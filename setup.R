@@ -19,6 +19,7 @@ install.packages(c(
     "magrittr",
     "markdown",
     "mime",
+    "R6",
     "rlang",
     "rmarkdown",
     "stringi",
@@ -26,3 +27,4 @@ install.packages(c(
     "testthat",
     "tinytex",
     "xfun"), lib = "../.R/library")
+    devtools::install_github("ManuelHentschel/vscDebugger")
