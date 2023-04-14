@@ -20,14 +20,14 @@ rename_columns <- function(df_to_rename) {
     "Common.Name" = "Common name",
     "Site" = "Site name",
     "Record.type" = "Sample method"
-    )
+  )
   for (i in 1:length(rename_map)) {
     col_name <- names(rename_map[i])
     new_col_name <- rename_map[[i]]
     if (col_name %in% names(df_to_rename)) {
       names(df_to_rename)[
         which(names(df_to_rename) == col_name)
-        ] <- new_col_name
+      ] <- new_col_name
     }
   }
   return(df_to_rename)
@@ -48,7 +48,7 @@ remove_columns <- function(df_with_all_columns) {
     "Sort.order",
     "Site.Status",
     "Owner"
-    )
+  )
   # Get column indices to remove
   cols_to_remove <- match(cols_to_remove, names(df_with_all_columns))
   # Remove columns
@@ -60,10 +60,10 @@ remove_columns <- function(df_with_all_columns) {
 transform_columns <- function(df) {
   df$Record.type <- ifelse(
     df$Record.type == "field record", "Field Observation", df$Record.type
-    )
+  )
   df$Record.type <- ifelse(
     df$Record.type == "voucher specimen", "Voucher Specimen", df$Record.type
-    )
+  )
   return(df)
 }
 
@@ -71,7 +71,7 @@ transform_columns <- function(df) {
 date_precision <- function(date_str) {
   # parse date string
   date <- parse_date_time(date_str, orders = c("dmy", "mdY", "Ymd", "Ym", "Y"))
-  
+
   # determine the type of date
   if (is.na(date$day) & is.na(date$month)) {
     "year"
@@ -86,7 +86,7 @@ date_precision <- function(date_str) {
 convert_to_range <- function(date_str) {
   # determine the type of date
   date_precision <- date_precision(date_str)
-  
+
   # parse date string and create date range
   if (date_precision == "year") {
     start_date <- parse_date_time(date_str, orders = c("Y"))
@@ -98,7 +98,7 @@ convert_to_range <- function(date_str) {
     start_date <- parse_date_time(date_str, orders = c("dmy", "mdY", "Ymd"))
     end_date <- start_date %m+% days(1) - seconds(1)
   }
-  
+
   # format date range as ISO 8601 string
   paste0(format(start_date, "%Y-%m-%dT%H:%M:%S"), "/", format(end_date, "%Y-%m-%dT%H:%M:%S"))
 }

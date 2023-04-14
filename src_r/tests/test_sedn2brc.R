@@ -22,7 +22,7 @@ test_that("rename_columns renames columns correctly", {
 
 test_that("remove_columns removes the correct columns", {
   # ARRANGE
-  df <- data.frame(Original.name = c("John", "Jane"), Age = c(25, 30), 
+  df <- data.frame(Original.name = c("John", "Jane"), Age = c(25, 30),
                    Sort.order = c(2, 1), Gender = c("Male", "Female"))
   # ACT
   result <- remove_columns(df)

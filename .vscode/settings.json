@@ -15,7 +15,7 @@
       "**/__pycache__": true,
       "**/.pytest_cache": true
     },
-    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvironment": false,
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
     "python.linting.flake8Enabled": true,
@@ -25,5 +25,7 @@
     "python.linting.mypyEnabled": true,
     "workbench.colorTheme": "Visual Studio Light",
     "python.defaultInterpreterPath": ".venv/bin/python",
-    "terminal.integrated.defaultProfile.linux": "bash"
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "r.bracketedPaste": true,
+    "r.rterm.linux": ".venv/bin/radian"
   }
