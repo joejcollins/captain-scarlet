@@ -2,6 +2,7 @@
 .libPaths("../.R/library")
 install.packages(c(
     "base64enc",
+    "devtools",
     "digest",
     "evaluate",
     "glue",
