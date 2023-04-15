@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.1.3
+FROM rocker/rstudio:latest
 
 RUN sudo apt -q update \
- && sudo apt install --assume-yes python3.8-venv
+ && sudo apt install --assume-yes python3.10-venv
