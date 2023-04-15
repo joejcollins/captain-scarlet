@@ -6,10 +6,10 @@ ports:
 - port: 8787
 
 tasks:
-- name: R setup
+- name: R and Python setup
   init: |
     mkdir -p ../.R/library
-    sudo Rscript setup.R
+    make requirements
   command: |
     sudo bash -c "echo R_LIBS_USER=$GITPOD_REPO_ROOT/../.R/library > /home/gitpod/.Renviron"
     ln -s /workspace/captain-scarlet /home/gitpod/captain-scarlet
@@ -20,20 +20,12 @@ tasks:
     # Restart the rserver with sudo otherwise it won't run for the gitpod user (dunno why)
     sudo rserver
     sudo pkill rserver
-- name: Python setup
-  init: |
-    python3 -m venv .venv
-    . .venv/bin/activate
-    pip install --upgrade pip setuptools
-    pip install -r requirements.txt
-  command: |
     alias python='python3'
 
 vscode:
   extensions:
     - bungcip.better-toml
     - eamodio.gitlens
-    - github.copilot
     - ms-python.python
     - ms-python.isort
     - RDebugger.r-debugger
