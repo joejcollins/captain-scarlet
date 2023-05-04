@@ -15,7 +15,7 @@ merge_csv_files <- function(data_path) {
 
 
 # Rename the SEDN columns to suit BRC.
-rename_columns <- function(df_to_rename) {
+rename_columns <- function(df_to_rename, columns_map) {
   rename_map <- c(
     "Species" = "Taxon",
     "Common.Name" = "Common name",
