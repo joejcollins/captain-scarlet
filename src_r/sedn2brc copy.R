@@ -14,25 +14,6 @@ merge_csv_files <- function(data_path) {
 }
 
 
-# Rename the SEDN columns to suit BRC.
-rename_columns <- function(df_to_rename) {
-  rename_map <- c(
-    "Species" = "Taxon",
-    "Common.Name" = "Common name",
-    "Site" = "Site name",
-    "Record.type" = "Sample method"
-  )
-  for (i in 1:length(rename_map)) {
-    col_name <- names(rename_map[i])
-    new_col_name <- rename_map[[i]]
-    if (col_name %in% names(df_to_rename)) {
-      names(df_to_rename)[
-        which(names(df_to_rename) == col_name)
-      ] <- new_col_name
-    }
-  }
-  return(df_to_rename)
-}
 
 # Remove columns from a data frame.
 remove_columns <- function(df_with_all_columns) {
