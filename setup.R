@@ -26,6 +26,7 @@ install.packages(c(
     "stringi",
     "stringr",
     "testthat",
+    "tidyverse",
     "tinytex",
     "xfun"), lib = "../.R/library")
     devtools::install_github("ManuelHentschel/vscDebugger")
